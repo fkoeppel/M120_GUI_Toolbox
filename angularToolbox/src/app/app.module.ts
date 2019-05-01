@@ -3,16 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BreathalyzerComponent } from './features/breathalyzer/components/breathalyzer/breathalyzer.component';
+import { BreathalyzerService } from './features/breathalyzer/services/breathalyzer.service';
+import { HomeComponent } from './features/home/components/home/home.component';
+import { NavigationComponent } from './features/navigation/components/navigation/navigation.component';
+import { CoordinatesVisualizerComponent } from './features/coordinates-visualizer/components/coordinates-visualizer/coordinates-visualizer.component';
+import { MetricUnitsComponent } from './features/metric-units/components/metric-units/metric-units.component';
+import { MetricUnitsService } from './features/metric-units/services/metric-units.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BreathalyzerComponent,
+    HomeComponent,
+    NavigationComponent,
+    CoordinatesVisualizerComponent,
+    MetricUnitsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [BreathalyzerService, MetricUnitsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
