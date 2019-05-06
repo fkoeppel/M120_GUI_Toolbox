@@ -1,18 +1,29 @@
-<div class="navigation-layout">
-    <a class="column-1"
-        routerLink="/breathalyzer">
-        <h2>Breathalyzer</h2>
-    </a>
-    <a class="column-2"
-        routerLink="/metric-units">
-        <h2>Metric-Units</h2>
-    </a>
-    <a class="column-3"
-        routerLink="/coordinates-visualizer">
-        <h2>Coordinates-Visualizer</h2>
-    </a>
-    <a class="column-4"
-        routerLink="/hash-generator">
-        <h2>Hash-Generator</h2>
-    </a>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/home">M120 AngularToolbox</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Features
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" routerLink="/breathalyzer">
+            Breathalyzer
+          </a>
+          <a class="dropdown-item" routerLink="/metric-units">
+            Metric-Units
+          </a>
+          <a class="dropdown-item" routerLink="/coordinates-visualizer">
+            Coordinates-Visualizer
+          </a>
+          <a class="dropdown-item" routerLink="/hash-generator">
+            Hash-Generator
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
