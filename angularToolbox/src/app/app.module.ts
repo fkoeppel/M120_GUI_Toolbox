@@ -14,6 +14,7 @@ import { HashGeneratorComponent } from './features/hash-generator/components/has
 import { CoordinatesVisualizerService } from './features/coordinates-visualizer/services/coordinates-visualizer.service';
 import { HashGeneratorService } from './features/hash-generator/services/hash-generator.service';
 import { MaterialModule } from './features/material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { MaterialModule } from './features/material/material.module';
     MetricUnitsComponent,
     HashGeneratorComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, MaterialModule],
+  imports: [BrowserModule, AppRoutingModule, MaterialModule, BrowserAnimationsModule],
   providers: [
     BreathalyzerService,
     MetricUnitsService,
