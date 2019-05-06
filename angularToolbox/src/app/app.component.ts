@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'angularToolbox';
-  constructor(private router: Router){
-    this.router.navigate(["home"]);
+  constructor(private router: Router) {
+    this.router.navigate(['coordinates-visualizer']);
   }
 }

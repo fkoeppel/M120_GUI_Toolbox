@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoordinatesVisualizer } from '../../models/coordinates-visualizer';
 
 @Component({
   selector: 'app-coordinates-visualizer',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coordinates-visualizer.component.scss']
 })
 export class CoordinatesVisualizerComponent implements OnInit {
+  inputCoordinate: CoordinatesVisualizer;
+  coordinates: CoordinatesVisualizer[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.inputCoordinate = new CoordinatesVisualizer(null, null);
+    this.coordinates = new Array<CoordinatesVisualizer>();
   }
 
+  ngOnInit() {}
+
+  add() {
+    this.coordinates.push(this.inputCoordinate);
+  }
 }

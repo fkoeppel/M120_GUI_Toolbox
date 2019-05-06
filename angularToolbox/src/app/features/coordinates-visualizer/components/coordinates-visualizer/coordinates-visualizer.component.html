@@ -1,3 +1,25 @@
-<p>
-  coordinates-visualizer works!
-</p>
+<div class="site">
+
+  <mat-form-field class="l-xAdd">
+    <input matInput
+      type="text"
+      [(ngModel)]="inputCoordinate.X">
+  </mat-form-field>
+
+  <mat-form-field class="l-yAdd">
+    <input matInput
+      type="text"
+      [(ngModel)]="inputCoordinate.Y">
+  </mat-form-field>
+
+  <button mat-raised-button
+    class="l-add"
+    (click)="add()">Add</button>
+
+  <div class="koordinates">
+    <div *ngFor="let coordinate of coordinates">
+      {{ coordinate.X }}{{ coordinate.Y }}
+    </div>
+  </div>
+
+</div>

@@ -1,9 +1,31 @@
 .site {
   display: grid;
-  grid-template-columns: 1fr, 1fr;
-  grid-template-rows: auto 1fr, 2fr;
+  grid-template-columns: 100px 100px auto auto;
+  grid-template-rows: auto auto auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
   grid-template-areas:
-    "x-column y-column add-column visualisation-column"
-    ""
-    "";
+    "xAdd yAdd add visualisation"
+    "koordinates koordinates . visualisation"
+    ". . . visualisation";
+}
+
+.l-xAdd {
+  grid-area: "xAdd";
+}
+
+.l-yAdd {
+  grid-area: "yAdd";
+}
+
+.l-add {
+  grid-area: "add";
+}
+
+.koordinates {
+  grid-area: "koordinates";
+}
+
+.l-visualisation {
+  grid-area: "visualisation";
 }
