@@ -13,6 +13,7 @@ import { MetricUnitsService } from './features/metric-units/services/metric-unit
 import { HashGeneratorComponent } from './features/hash-generator/components/hash-generator/hash-generator.component';
 import { CoordinatesVisualizerService } from './features/coordinates-visualizer/services/coordinates-visualizer.service';
 import { HashGeneratorService } from './features/hash-generator/services/hash-generator.service';
+import { MaterialModule } from './features/material/material.module';
 
 @NgModule({
   declarations: [
@@ -24,11 +25,14 @@ import { HashGeneratorService } from './features/hash-generator/services/hash-ge
     MetricUnitsComponent,
     HashGeneratorComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
+  imports: [BrowserModule, AppRoutingModule, MaterialModule],
+  providers: [
+    BreathalyzerService,
+    MetricUnitsService,
+    CoordinatesVisualizerService,
+    HashGeneratorService
   ],
-  providers: [BreathalyzerService, MetricUnitsService, CoordinatesVisualizerService, HashGeneratorService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [MaterialModule]
 })
-export class AppModule { }
+export class AppModule {}
