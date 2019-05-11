@@ -1,2 +1,1 @@
-export class CoordinatesVisualizer {
-}
+export class CoordinatesVisualizer {}

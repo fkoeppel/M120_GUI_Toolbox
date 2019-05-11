@@ -1,3 +1,33 @@
-<p>
-  coordinates-visualizer works!
-</p>
+<mat-form-field class="input-x">
+  <input matInput
+    type="text"
+    placeholder="X"
+    [(ngModel)]="inputCoordinate.X">
+</mat-form-field>
+
+<mat-form-field class="input-y">
+  <input matInput
+    type="text"
+    placeholder="Y"
+    [(ngModel)]="inputCoordinate.Y">
+</mat-form-field>
+
+<button mat-raised-button
+  class="button-add"
+  (click)="add()">Add</button>
+
+<button mat-raised-button
+  class="button-generate"
+  (click)="generate()">Generate</button>
+
+<div class="output">
+  <div *ngFor="let coordinate of coordinates">
+    <span>X:{{ coordinate.X }}</span>
+    <span> </span>
+    <span>Y:{{ coordinate.Y }}</span>
+  </div>
+</div>
+
+
+<div class="visual"
+  id="visualisation"></div>
