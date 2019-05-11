@@ -11,6 +11,6 @@ export class AppComponent {
 
   routes = ['home', 'coordinates-visualizer', 'breathalyzer', 'hash-generator', 'metric-units'];
   constructor(private router: Router) {
-    this.router.navigate([this.routes[1]]);
+    this.router.navigate([this.routes[0]]);
   }
 }
