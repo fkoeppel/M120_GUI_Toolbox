@@ -1,31 +1,34 @@
-.site {
+:host {
   display: grid;
-  grid-template-columns: 100px 100px auto auto;
-  grid-template-rows: auto auto auto;
-  grid-column-gap: 10px;
-  grid-row-gap: 15px;
-  grid-template-areas:
-    "xAdd yAdd add visualisation"
-    "koordinates koordinates . visualisation"
-    ". . . visualisation";
+  grid-gap: 20px;
+  height: 95vh;
+  grid-template:
+    "input-x      input-y   button-add  visual " 50px
+    "output       output    .           visual " 500px
+    ".            .         .           visual " 1fr
+    / 30px 30px auto 1fr;
 }
 
-.l-xAdd {
-  grid-area: "xAdd";
+.input-x {
+  grid-area: input-x;
 }
 
-.l-yAdd {
-  grid-area: "yAdd";
+.input-y {
+  grid-area: input-y;
 }
 
-.l-add {
-  grid-area: "add";
+.output {
+  grid-area: output;
 }
 
-.koordinates {
-  grid-area: "koordinates";
+.button-add {
+  grid-area: button-add;
 }
 
-.l-visualisation {
-  grid-area: "visualisation";
+.coordinates {
+  grid-area: coordinates;
+}
+
+.visual {
+  grid-area: visual;
 }

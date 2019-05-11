@@ -9,6 +9,6 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'angularToolbox';
   constructor(private router: Router) {
-    this.router.navigate(['home']);
+    this.router.navigate(['coordinates-visualizer']);
   }
 }
