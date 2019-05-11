@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'angularToolbox';
+
+  routes = ['home', 'coordinates-visualizer', 'breathalyzer', 'hash-generator', 'metric-units'];
   constructor(private router: Router) {
-    this.router.navigate(['coordinates-visualizer']);
+    this.router.navigate([this.routes[0]]);
   }
 }
