@@ -1,3 +1,18 @@
-<p>
-  hash-generator works!
-</p>
+<div class="container p-3">
+
+
+  <h3>SHA512 Hash</h3>
+  <form>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Passwort</label>
+      <!-- <input type="password" class="form-control" ng-model="HashGenerator.password" value="{{HashGenerator.password}}"
+        id="passwordField" required> -->
+    </div>
+    <button type="submit" (click)="createHash()" class="btn btn-secondary">Hash erstellen</button>
+  </form>
+
+  <input class="form-control" style=" display: none;" type="text" value="hash..." readonly>
+
+
+
+</div>
