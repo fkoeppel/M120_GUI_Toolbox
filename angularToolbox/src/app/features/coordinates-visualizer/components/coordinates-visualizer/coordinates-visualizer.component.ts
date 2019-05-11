@@ -11,6 +11,11 @@ export class CoordinatesVisualizerComponent implements OnInit {
   coordinates: Coordinate[];
   grid: String[][];
 
+  lowestX: number;
+  highestY: number;
+  lengthX: number;
+  lengthY: number;
+
   constructor() {
     this.inputCoordinate = new Coordinate(null, null);
     this.coordinates = new Array<Coordinate>();
@@ -24,21 +29,51 @@ export class CoordinatesVisualizerComponent implements OnInit {
     this.coordinates.push(new Coordinate(0, 0));
     this.coordinates.push(new Coordinate(0, -1));
     this.coordinates.push(new Coordinate(-1, 0));
-    this.createVisual();
+    this.createVisualGrid();
     console.table(this.grid);
   }
 
-  ngOnInit() {
-    document.getElementById('visualisation').innerHTML = '<h1>Hello</h1>';
-  }
+  ngOnInit() {}
 
   add() {
     this.coordinates.push(this.inputCoordinate);
     this.inputCoordinate = new Coordinate(null, null);
-    this.createVisual();
+    this.createVisualGrid();
+    const visualTable = this.createVisualTableFromGrid();
+    document.getElementById('visualisation').innerHTML = visualTable;
   }
 
-  createVisual() {
+  createVisualTableFromGrid(): string {
+    let html = '<table>';
+
+    for (let i = 0; i < this.lengthY; i++) {
+      if (i == this.lengthY - 1 || i == this.lengthY - 2) {
+        html = html + '<tr>';
+        for (let j = 0; j < this.lengthX * 2 + 1; j++) {
+          html = html + '<th style="max-width: 40px; min-width: 40px;">-----</th>';
+        }
+        html = html + '</tr>';
+      }
+
+      html = html + '<tr>';
+      for (let j = 0; j < this.lengthX; j++) {
+        html = html + '<th>|</th>';
+        if (this.grid[j][i] == null || this.grid[j][i] == '') {
+          html = html + '<th style="max-width: 40px; min-width: 40px;"></th>';
+        } else {
+          html =
+            html + '<th style="max-width: 40px; min-width: 40px;">' + this.grid[j][i] + '</th>';
+        }
+      }
+      html = html + '<th>|</th>';
+      html = html + '</tr>';
+    }
+    html = html + '</table>';
+
+    return html;
+  }
+
+  createVisualGrid() {
     let highestX = 0;
     let highestY = 0;
     let lowestX = 0;
@@ -94,9 +129,13 @@ export class CoordinatesVisualizerComponent implements OnInit {
       }
 
       const gridX = grid[newX];
-      gridX[newY] = 'X:' + coordinate.X + '/' + 'Y:' + coordinate.Y;
+      gridX[newY] = '(' + coordinate.X + '/' + coordinate.Y + ')';
     });
 
+    this.lengthX = xHeight;
+    this.lengthY = yHeight;
+    this.highestY = highestY;
+    this.lowestX = lowestX;
     this.grid = grid;
   }
 }
