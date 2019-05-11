@@ -28,7 +28,9 @@ export class CoordinatesVisualizerComponent implements OnInit {
     console.table(this.grid);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    document.getElementById('visualisation').innerHTML = '<h1>Hello</h1>';
+  }
 
   add() {
     this.coordinates.push(this.inputCoordinate);
