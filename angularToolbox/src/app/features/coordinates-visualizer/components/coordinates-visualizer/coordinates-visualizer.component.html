@@ -16,6 +16,10 @@
   class="button-add"
   (click)="add()">Add</button>
 
+<button mat-raised-button
+  class="button-generate"
+  (click)="generate()">Generate</button>
+
 <div class="output">
   <div *ngFor="let coordinate of coordinates">
     <span>X:{{ coordinate.X }}</span>

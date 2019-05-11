@@ -20,60 +20,26 @@ export class CoordinatesVisualizerComponent implements OnInit {
     this.inputCoordinate = new Coordinate(null, null);
     this.coordinates = new Array<Coordinate>();
 
-    this.coordinates.push(new Coordinate(1, 1));
-    this.coordinates.push(new Coordinate(1, 0));
-    this.coordinates.push(new Coordinate(0, 1));
-    this.coordinates.push(new Coordinate(-1, 1));
-    this.coordinates.push(new Coordinate(1, -1));
-    this.coordinates.push(new Coordinate(-1, -1));
     this.coordinates.push(new Coordinate(0, 0));
-    this.coordinates.push(new Coordinate(0, -1));
-    this.coordinates.push(new Coordinate(-1, 0));
-    this.createVisualGrid();
-    console.table(this.grid);
   }
 
   ngOnInit() {}
 
-  add() {
+  async generate() {
+    this.grid = await this.createVisualGrid();
+    await this.createVisualTableFromGrid().then(function(value) {
+      document.getElementById('visualisation').innerHTML = value;
+    });
+    return 1;
+  }
+
+  async add() {
     this.coordinates.push(this.inputCoordinate);
     this.inputCoordinate = new Coordinate(null, null);
-    this.createVisualGrid();
-    const visualTable = this.createVisualTableFromGrid();
-    document.getElementById('visualisation').innerHTML = visualTable;
+    return 1;
   }
 
-  createVisualTableFromGrid(): string {
-    let html = '<table>';
-
-    for (let i = 0; i < this.lengthY; i++) {
-      if (i == this.lengthY - 1 || i == this.lengthY - 2) {
-        html = html + '<tr>';
-        for (let j = 0; j < this.lengthX * 2 + 1; j++) {
-          html = html + '<th style="max-width: 40px; min-width: 40px;">-----</th>';
-        }
-        html = html + '</tr>';
-      }
-
-      html = html + '<tr>';
-      for (let j = 0; j < this.lengthX; j++) {
-        html = html + '<th>|</th>';
-        if (this.grid[j][i] == null || this.grid[j][i] == '') {
-          html = html + '<th style="max-width: 40px; min-width: 40px;"></th>';
-        } else {
-          html =
-            html + '<th style="max-width: 40px; min-width: 40px;">' + this.grid[j][i] + '</th>';
-        }
-      }
-      html = html + '<th>|</th>';
-      html = html + '</tr>';
-    }
-    html = html + '</table>';
-
-    return html;
-  }
-
-  createVisualGrid() {
+  async createVisualGrid() {
     let highestX = 0;
     let highestY = 0;
     let lowestX = 0;
@@ -136,6 +102,41 @@ export class CoordinatesVisualizerComponent implements OnInit {
     this.lengthY = yHeight;
     this.highestY = highestY;
     this.lowestX = lowestX;
-    this.grid = grid;
+    return grid;
+  }
+
+  async createVisualTableFromGrid() {
+    const html = await this.createTables();
+    return html;
+  }
+
+  private createTables() {
+    let html = '<table>';
+    html = this.createRows(html);
+    html = html + '</table>';
+    return html;
+  }
+
+  private createRows(html: string) {
+    for (let i = 0; i < this.lengthY; i++) {
+      html = html + '<tr>';
+      html = this.createColumns(html, i);
+      html = html + '</tr>';
+    }
+    return html;
+  }
+
+  private createColumns(html: string, i: number) {
+    for (let j = 0; j < this.lengthX; j++) {
+      html = html + '<th max-width: 3px;>|</th>';
+      if (this.grid[j][i] == null || this.grid[j][i] == '') {
+        html = html + '<th style="text-align: center;min-width: 40px;">-</th>';
+      } else {
+        const koo = this.grid[j][i];
+        html = html + '<th style="text-align: center; min-width: 40px;">' + koo + '</th>';
+      }
+    }
+    html = html + '<th>|</th>';
+    return html;
   }
 }
