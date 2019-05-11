@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Coordinate } from '../../models/coordinate';
-import { resolve } from 'url';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-coordinates-visualizer',
@@ -34,13 +34,11 @@ export class CoordinatesVisualizerComponent implements OnInit {
       console.log('buildingGridFinisched');
     });
     console.log('2');
-    await Promise.resolve().then(() => {
-      this.visualTable = this.createVisualTableFromGrid();
+    await this.createVisualTableFromGrid().then(table => {
+      this.visualTable = table;
       console.log('buildingVisualFinisched');
     });
-    console.log('3');
-    document.getElementById('visualisation').innerHTML = this.visualTable;
-    console.log('4');
+    $('#visualisation').html(this.visualTable);
     return 1;
   }
 
@@ -115,27 +113,27 @@ export class CoordinatesVisualizerComponent implements OnInit {
     return grid;
   }
 
-  createVisualTableFromGrid() {
+  async createVisualTableFromGrid() {
     return this.createTables();
   }
 
-  private createTables() {
+  private async createTables() {
     let html = '<table>';
-    html = this.createRows(html);
+    html = await this.createRows(html);
     html = html + '</table>';
     return html;
   }
 
-  private createRows(html: string) {
+  private async createRows(html: string) {
     for (let i = 0; i < this.lengthY; i++) {
       html = html + '<tr>';
-      html = this.createColumns(html, i);
+      html = await this.createColumns(html, i);
       html = html + '</tr>';
     }
     return html;
   }
 
-  private createColumns(html: string, i: number) {
+  private async createColumns(html: string, i: number) {
     for (let j = 0; j < this.lengthX; j++) {
       html = html + '<th max-width: 3px;>|</th>';
       if (this.grid[j][i] == null || this.grid[j][i] == '') {
