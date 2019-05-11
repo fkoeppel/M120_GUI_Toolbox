@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Coordinate } from '../../models/coordinate';
+import { resolve } from 'url';
 
 @Component({
   selector: 'app-coordinates-visualizer',
@@ -10,6 +11,7 @@ export class CoordinatesVisualizerComponent implements OnInit {
   inputCoordinate: Coordinate;
   coordinates: Coordinate[];
   grid: String[][];
+  visualTable: string;
 
   lowestX: number;
   highestY: number;
@@ -26,17 +28,25 @@ export class CoordinatesVisualizerComponent implements OnInit {
   ngOnInit() {}
 
   async generate() {
-    this.grid = await this.createVisualGrid();
-    await this.createVisualTableFromGrid().then(function(value) {
-      document.getElementById('visualisation').innerHTML = value;
+    console.log('1');
+    await this.createVisualGrid().then(grid => {
+      this.grid = grid;
+      console.log('buildingGridFinisched');
     });
+    console.log('2');
+    await Promise.resolve().then(() => {
+      this.visualTable = this.createVisualTableFromGrid();
+      console.log('buildingVisualFinisched');
+    });
+    console.log('3');
+    document.getElementById('visualisation').innerHTML = this.visualTable;
+    console.log('4');
     return 1;
   }
 
-  async add() {
+  add() {
     this.coordinates.push(this.inputCoordinate);
     this.inputCoordinate = new Coordinate(null, null);
-    return 1;
   }
 
   async createVisualGrid() {
@@ -105,9 +115,8 @@ export class CoordinatesVisualizerComponent implements OnInit {
     return grid;
   }
 
-  async createVisualTableFromGrid() {
-    const html = await this.createTables();
-    return html;
+  createVisualTableFromGrid() {
+    return this.createTables();
   }
 
   private createTables() {
