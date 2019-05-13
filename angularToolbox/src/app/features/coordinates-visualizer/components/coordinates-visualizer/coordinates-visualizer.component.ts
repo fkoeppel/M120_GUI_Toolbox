@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Coordinate } from '../../models/coordinate';
 import * as $ from 'jquery';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CoordinateForm } from '../../models/coordinate-form';
 
 @Component({
   selector: 'app-coordinates-visualizer',
@@ -8,10 +10,11 @@ import * as $ from 'jquery';
   styleUrls: ['./coordinates-visualizer.component.scss']
 })
 export class CoordinatesVisualizerComponent implements OnInit {
-  inputCoordinate: Coordinate;
   coordinates: Coordinate[];
   grid: String[][];
   visualTable: string;
+
+  public coordinateForm: FormGroup;
 
   lowestX: number;
   highestY: number;
@@ -19,13 +22,16 @@ export class CoordinatesVisualizerComponent implements OnInit {
   lengthY: number;
 
   constructor() {
-    this.inputCoordinate = new Coordinate(null, null);
     this.coordinates = new Array<Coordinate>();
-
     this.coordinates.push(new Coordinate(0, 0));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.coordinateForm = new FormGroup({
+      inputX: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      inputY: new FormControl('', [Validators.required, Validators.maxLength(60)])
+    });
+  }
 
   async generate() {
     console.log('1');
@@ -42,9 +48,22 @@ export class CoordinatesVisualizerComponent implements OnInit {
     return 1;
   }
 
-  add() {
-    this.coordinates.push(this.inputCoordinate);
-    this.inputCoordinate = new Coordinate(null, null);
+  public hasError = (controlName: string, errorName: string) => {
+    return this.coordinateForm.controls[controlName].hasError(errorName);
+  }
+
+  public createCoordinate = coordinateValue => {
+    if (this.coordinateForm.valid) {
+      this.executeCoordinateCreation(coordinateValue);
+    }
+  }
+
+  private executeCoordinateCreation = coordinateValue => {
+    const formValue: CoordinateForm = {
+      inputX: coordinateValue.inputX,
+      inputY: coordinateValue.inputY
+    };
+    this.coordinates.push(new Coordinate(formValue.inputX, formValue.inputY));
   }
 
   async createVisualGrid() {

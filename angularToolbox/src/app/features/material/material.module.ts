@@ -49,6 +49,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 /**
  * NgModule that includes all Material modules.
@@ -105,7 +107,11 @@ import { FormsModule } from '@angular/forms';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    ReactiveFormsModule,
+    FormControl,
+    FormGroup,
+    Validators
   ]
 })
 export class MaterialModule {}

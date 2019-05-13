@@ -1,20 +1,35 @@
-<mat-form-field class="input-x">
-  <input matInput
-    type="text"
-    placeholder="X"
-    [(ngModel)]="inputCoordinate.X">
-</mat-form-field>
+<form [formGroup]="coordinateForm"
+  autocomplete="off"
+  novalidate
+  (ngSubmit)="createCoordinate(coordinateForm.value)">
 
-<mat-form-field class="input-y">
-  <input matInput
-    type="text"
-    placeholder="Y"
-    [(ngModel)]="inputCoordinate.Y">
-</mat-form-field>
+  <mat-form-field class="input-x"
+    formControlName="inputX">
+    <input matInput
+      type="text"
+      placeholder="X"
+      [(ngModel)]="inputCoordinate.X">
+    <mat-hint>Not more then 2 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('inputX', 'required')">X is required</mat-error>
+    <mat-error *ngIf="hasError('inputX', 'maxlength')">You have more than 2 characters</mat-error>
+  </mat-form-field>
 
-<button mat-raised-button
-  class="button-add"
-  (click)="add()">Add</button>
+  <mat-form-field class="input-y"
+    formControlName="inputY">
+    <input matInput
+      type="text"
+      placeholder="Y"
+      [(ngModel)]="inputCoordinate.Y">
+    <mat-hint>Not more then 2 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('inputY', 'required')">Y is required</mat-error>
+    <mat-error *ngIf="hasError('inputY', 'maxlength')">You have more than 2 characters</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button
+    [disabled]="!coordinateForm.valid"
+    class="button-add"></button>
+
+</form>
 
 <button mat-raised-button
   class="button-generate"
