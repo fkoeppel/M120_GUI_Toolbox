@@ -1,9 +1,9 @@
-<form class="center">
+<form class="form">
     <h1>Metric Units</h1>
     <mat-form-field name="numb">
         <input [(ngModel)]="numb" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Value" />
     </mat-form-field>
-    <p></p>
+    <span>&nbsp;</span>
     <mat-form-field>
         <mat-label>From</mat-label>
         <mat-select [(ngModel)]="from" name="from_select">
@@ -12,7 +12,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <span>&nbsp;</span>
+    <span style="font-size: 20px; color: #673fb4;">&nbsp;{{ calc() }}&nbsp;</span>
     <mat-form-field>
         <mat-label>To</mat-label>
         <mat-select [(ngModel)]="to" name="to_select">
@@ -21,8 +21,8 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <p class="center">
+    <!-- <p class="result">
         {{ numb }} <span style="color: red">{{ getName(from) }}</span> {{ calc() }}
         <span style="color: red">{{ getName(to) }}</span>
-    </p>
+    </p> -->
 </form>
