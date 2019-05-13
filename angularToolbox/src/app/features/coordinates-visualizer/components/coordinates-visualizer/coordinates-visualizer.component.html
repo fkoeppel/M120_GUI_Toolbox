@@ -41,11 +41,10 @@
 </form>
 
 <div class="output">
-  <div *ngFor="let coordinate of coordinates">
-    <span>X:{{ coordinate.X }}</span>
-    <span> </span>
-    <span>Y:{{ coordinate.Y }}</span>
-  </div>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let coordinate of coordinates"
+      role="listitem">X:{{ coordinate.X }}Y:{{ coordinate.Y }}</mat-list-item>
+  </mat-list>
 </div>
 
 

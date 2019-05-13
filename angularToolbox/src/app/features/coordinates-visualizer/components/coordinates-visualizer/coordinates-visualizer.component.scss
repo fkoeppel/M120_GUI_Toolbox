@@ -1,9 +1,10 @@
 :host {
   display: grid;
   grid-gap: 20px;
+  max-height: 100vh;
   grid-template:
     "input   visual " auto
-    "output  visual " 100px
+    "output  visual " 300px
     ".       visual " 1fr
     / auto 1fr;
 }
