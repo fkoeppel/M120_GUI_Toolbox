@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Coordinate } from '../../models/coordinate';
 import * as $ from 'jquery';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoordinateForm } from '../../models/coordinate-form';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-coordinates-visualizer',
