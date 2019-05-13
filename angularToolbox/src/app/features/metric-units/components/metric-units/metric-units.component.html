@@ -1,3 +1,28 @@
-<p>
-  metric-units works!
-</p>
+<form class="center">
+    <h1>Metric Units</h1>
+    <mat-form-field name="numb">
+        <input [(ngModel)]="numb" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Value" />
+    </mat-form-field>
+    <p></p>
+    <mat-form-field>
+        <mat-label>From</mat-label>
+        <mat-select [(ngModel)]="from" name="from_select">
+            <mat-option *ngFor="let unit of units" [value]="unit.value">
+                {{ unit.viewValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <span>&nbsp;</span>
+    <mat-form-field>
+        <mat-label>To</mat-label>
+        <mat-select [(ngModel)]="to" name="to_select">
+            <mat-option *ngFor="let unit of units" [value]="unit.value">
+                {{ unit.viewValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p class="center">
+        {{ numb }} <span style="color: red">{{ getName(from) }}</span> {{ calc() }}
+        <span style="color: red">{{ getName(to) }}</span>
+    </p>
+</form>
