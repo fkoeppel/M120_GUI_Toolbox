@@ -2,7 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Coordinate } from '../../models/coordinate';
 import * as $ from 'jquery';
 import { CoordinateForm } from '../../models/coordinate-form';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+
+import { ErrorStateMatcher } from '@angular/material/core';
+
+export class IsDirtyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return !!(control && control.invalid && control.dirty);
+  }
+}
 
 @Component({
   selector: 'app-coordinates-visualizer',
@@ -20,16 +28,44 @@ export class CoordinatesVisualizerComponent implements OnInit {
   highestY: number;
   lengthX: number;
   lengthY: number;
+  matcher: IsDirtyErrorStateMatcher;
 
   constructor() {
     this.coordinates = new Array<Coordinate>();
     this.coordinates.push(new Coordinate(0, 0));
+    this.defaultForm();
+    this.matcher = new IsDirtyErrorStateMatcher();
+
+    for (let index = 0; index < 30; index++) {
+      this.coordinates.push(new Coordinate(1, index));
+    }
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public hasError = (controlName: string, errorName: string) => {
+    return this.coordinateForm.controls[controlName].hasError(errorName);
+  }
+
+  public createCoordinate = coordinateValue => {
+    if (this.coordinateForm.valid) {
+      this.executeCoordinateCreation(coordinateValue);
+      this.defaultForm();
+    }
+  }
+
+  private executeCoordinateCreation = coordinateValue => {
+    const formValue: CoordinateForm = {
+      inputX: coordinateValue.inputX,
+      inputY: coordinateValue.inputY
+    };
+    this.coordinates.unshift(new Coordinate(formValue.inputX, formValue.inputY));
+  }
+
+  private defaultForm() {
     this.coordinateForm = new FormGroup({
-      inputX: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      inputY: new FormControl('', [Validators.required, Validators.maxLength(60)])
+      inputX: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+      inputY: new FormControl('', [Validators.required, Validators.maxLength(2)])
     });
   }
 
@@ -46,24 +82,6 @@ export class CoordinatesVisualizerComponent implements OnInit {
     });
     $('#visualisation').html(this.visualTable);
     return 1;
-  }
-
-  public hasError = (controlName: string, errorName: string) => {
-    return this.coordinateForm.controls[controlName].hasError(errorName);
-  }
-
-  public createCoordinate = coordinateValue => {
-    if (this.coordinateForm.valid) {
-      this.executeCoordinateCreation(coordinateValue);
-    }
-  }
-
-  private executeCoordinateCreation = coordinateValue => {
-    const formValue: CoordinateForm = {
-      inputX: coordinateValue.inputX,
-      inputY: coordinateValue.inputY
-    };
-    this.coordinates.push(new Coordinate(formValue.inputX, formValue.inputY));
   }
 
   async createVisualGrid() {
