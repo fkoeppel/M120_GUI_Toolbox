@@ -11,14 +11,17 @@
       placeholder="X"
       #inputX
       [errorStateMatcher]="matcher"
+      pattern="\d*"
       maxlength="2">
     <mat-hint align="end">{{inputX.value.length}} / 2</mat-hint>
+    <mat-error *ngIf="hasError('inputY', 'pattern')">Only numbers are allowed</mat-error>
     <mat-error *ngIf="hasError('inputX', 'required')">X is required</mat-error>
     <mat-error *ngIf="hasError('inputX', 'maxlength')">You have more than 2 characters</mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <input matInput
+      pattern="\d*"
       formControlName="inputY"
       type="text"
       placeholder="Y"
@@ -26,6 +29,7 @@
       [errorStateMatcher]="matcher"
       maxlength="2">
     <mat-hint align="end">{{inputY.value.length}} / 2</mat-hint>
+    <mat-error *ngIf="hasError('inputY', 'pattern')">Only numbers are allowed</mat-error>
     <mat-error *ngIf="hasError('inputY', 'required')">Y is required</mat-error>
     <mat-error *ngIf="hasError('inputY', 'maxlength')">You have more than 2 characters</mat-error>
   </mat-form-field>
@@ -41,10 +45,14 @@
 </form>
 
 <div class="output">
-  <mat-list role="list">
-    <mat-list-item *ngFor="let coordinate of coordinates"
-      role="listitem">X:{{ coordinate.X }}Y:{{ coordinate.Y }}</mat-list-item>
-  </mat-list>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let coordinate of coordinates"
+      [selectable]="selectable">
+      X: {{ coordinate.X }} Y: {{ coordinate.Y }}
+      <mat-icon matChipRemove
+        (click)="remove(coordinate)">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
 </div>
 
 

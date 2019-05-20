@@ -43,6 +43,15 @@ export class CoordinatesVisualizerComponent implements OnInit {
 
   ngOnInit() {}
 
+  remove(coordinate: Coordinate) {
+    console.log(coordinate);
+    this.coordinates.forEach(element => {
+      if (element.X == coordinate.X && element.Y == coordinate.X) {
+        element = null;
+      }
+    });
+  }
+
   public hasError = (controlName: string, errorName: string) => {
     return this.coordinateForm.controls[controlName].hasError(errorName);
   }
