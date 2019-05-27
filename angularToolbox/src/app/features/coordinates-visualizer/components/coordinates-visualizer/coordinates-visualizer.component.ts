@@ -5,6 +5,7 @@ import { CoordinateForm } from '../../models/coordinate-form';
 import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 
 import { ErrorStateMatcher } from '@angular/material/core';
+import { BehaviorSubject } from 'rxjs';
 
 export class IsDirtyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -18,6 +19,7 @@ export class IsDirtyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./coordinates-visualizer.component.scss']
 })
 export class CoordinatesVisualizerComponent implements OnInit {
+  coordinates$: BehaviorSubject<Coordinate[]>;
   coordinates: Coordinate[];
   grid: String[][];
   visualTable: string;
@@ -39,17 +41,21 @@ export class CoordinatesVisualizerComponent implements OnInit {
     for (let index = 0; index < 30; index++) {
       this.coordinates.push(new Coordinate(1, index));
     }
+
+    this.coordinates$ = new BehaviorSubject<Coordinate[]>(this.coordinates);
   }
 
   ngOnInit() {}
 
   remove(coordinate: Coordinate) {
-    console.log(coordinate);
-    this.coordinates.forEach(element => {
-      if (element.X == coordinate.X && element.Y == coordinate.X) {
-        element = null;
+    const newCoordinates = this.coordinates.filter(element => {
+      if (element.X === coordinate.X && element.Y === coordinate.Y) {
+        return false;
       }
+      return true;
     });
+    this.coordinates = newCoordinates;
+    this.coordinates$.next(newCoordinates);
   }
 
   public hasError = (controlName: string, errorName: string) => {
