@@ -13,17 +13,15 @@ import { IsDirtyErrorStateMatcher } from '../../shared/IsDirtyErrorStateMatcher'
 })
 export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
   coordinates$: BehaviorSubject<Coordinate[]>;
-  coordinates: Coordinate[];
-  grid: String[][];
-  visualTable: string;
+  private coordinates: Coordinate[];
+  private grid: String[][];
+  private visualTable: string;
   generateEnabled$: BehaviorSubject<boolean>;
-
-  public coordinateForm: FormGroup;
-
-  lowestX: number;
-  highestY: number;
-  lengthX: number;
-  lengthY: number;
+  coordinateForm: FormGroup;
+  private lowestX: number;
+  private highestY: number;
+  private lengthX: number;
+  private lengthY: number;
   matcher: IsDirtyErrorStateMatcher;
 
   constructor() {
@@ -34,11 +32,10 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     this.coordinates$ = new BehaviorSubject<Coordinate[]>(this.coordinates);
 
     this.coordinates.push(new Coordinate(0, 0));
-    this.createDefaultCoordinates();
+    // this.createDefaultCoordinates();
 
     this.coordinates$.subscribe(() => {
       this.generateEnabled$.next(this.isGenerateEnabled(this.coordinates));
-      console.log(this.generateEnabled$.getValue());
     });
   }
 
@@ -111,22 +108,13 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     });
   }
 
-  async generate() {
-    console.log('1');
-    await this.createVisualGrid().then(grid => {
-      this.grid = grid;
-      console.log('buildingGridFinisched');
-    });
-    console.log('2');
-    await this.createVisualTableFromGrid().then(table => {
-      this.visualTable = table;
-      console.log('buildingVisualFinisched');
-    });
+  generate() {
+    this.grid = this.createVisualGrid();
+    this.visualTable = this.createVisualTableFromGrid();
     $('#visualisation').html(this.visualTable);
-    return 1;
   }
 
-  async createVisualGrid() {
+  createVisualGrid() {
     let highestX = 0;
     let highestY = 0;
     let lowestX = 0;
@@ -192,27 +180,27 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     return grid;
   }
 
-  async createVisualTableFromGrid() {
+  createVisualTableFromGrid() {
     return this.createTables();
   }
 
-  private async createTables() {
+  private createTables() {
     let html = '<table>';
-    html = await this.createRows(html);
+    html = this.createRows(html);
     html = html + '</table>';
     return html;
   }
 
-  private async createRows(html: string) {
+  private createRows(html: string) {
     for (let i = 0; i < this.lengthY; i++) {
       html = html + '<tr>';
-      html = await this.createColumns(html, i);
+      html = this.createColumns(html, i);
       html = html + '</tr>';
     }
     return html;
   }
 
-  private async createColumns(html: string, i: number) {
+  private createColumns(html: string, i: number) {
     for (let j = 0; j < this.lengthX; j++) {
       html = html + '<th max-width: 3px;>|</th>';
       if (this.grid[j][i] == null || this.grid[j][i] == '') {
