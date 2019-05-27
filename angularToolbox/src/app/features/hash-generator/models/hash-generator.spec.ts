@@ -1,7 +1,7 @@
-import { HashGenerator } from './hash-generator';
+import { HashGenerator } from "./hash-generator";
 
-describe('HashGenerator', () => {
-  it('should create an instance', () => {
+describe("HashGenerator", () => {
+  it("should create an instance", () => {
     expect(new HashGenerator()).toBeTruthy();
   });
 });

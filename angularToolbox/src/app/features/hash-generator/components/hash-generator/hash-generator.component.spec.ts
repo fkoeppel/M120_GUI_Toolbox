@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { HashGeneratorComponent } from './hash-generator.component';
+import { HashGeneratorComponent } from "./hash-generator.component";
 
-describe('HashGeneratorComponent', () => {
+describe("HashGeneratorComponent", () => {
   let component: HashGeneratorComponent;
   let fixture: ComponentFixture<HashGeneratorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HashGeneratorComponent ]
-    })
-    .compileComponents();
+      declarations: [HashGeneratorComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('HashGeneratorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

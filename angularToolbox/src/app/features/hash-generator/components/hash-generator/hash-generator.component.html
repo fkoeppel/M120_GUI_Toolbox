@@ -1,18 +1,78 @@
-<div class="container p-3">
-
-
-  <h3>SHA512 Hash</h3>
-  <form>
+<div class="container">
+  <!--
+  <form class="form-inline">
     <div class="form-group">
-      <label for="exampleInputPassword1">Passwort</label>
-      <!-- <input type="password" class="form-control" ng-model="HashGenerator.password" value="{{HashGenerator.password}}"
-        id="passwordField" required> -->
+      <input type="password" placeholder="Passwort Eingabe" class="form-control" [(ngModel)]="hashGenerator.password"
+        [ngModelOptions]="{standalone: true}" id="passwordField" required>
+      <button type="submit" (click)="createHash()" class="btn btn-secondary">Hash erstellen</button>
     </div>
-    <button type="submit" (click)="createHash()" class="btn btn-secondary">Hash erstellen</button>
   </form>
+-->
 
-  <input class="form-control" style=" display: none;" type="text" value="hash..." readonly>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          SHA512
+        </mat-panel-title>
+        <mat-panel-description>
+          Generierung von einem sicheren SHA512 Hash
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <span>
+        Geben Sie Ihr Passwort ein und klicken Sie auf 'Hash generieren' wodurch
+        der SHA512 Hash generiert.
+      </span>
 
+      <form [formGroup]="hashInputForm" novalidate>
+        <mat-form-field>
+          <input matInput formControlName="password" placeholder="Passwort Eingabe" type="password"
+            [(ngModel)]="hashGenerator.password512" required />
+        </mat-form-field>
 
+        <button mat-button type="submit" [disabled]="!hashInputForm.valid" (click)="createSHA_512()" color="primary">
+          Hash generieren <mat-icon>create</mat-icon>
+        </button>
+      </form>
 
+      <div id="hashOutput512" style="display: none">
+        <mat-form-field>
+          <input matInput placeholder="SHA512 Hash von Passwort" [(ngModel)]="hashGenerator.hash512"
+            [ngModelOptions]="{ standalone: true }" type="text" disabled readonly />
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          SHA256
+        </mat-panel-title>
+        <mat-panel-description>
+          SHA256 Hash generieren
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <span>
+        Geben Sie Ihr Passwort ein und klicken Sie auf 'Hash generieren' wodurch
+        der SHA256 Hash generiert.
+      </span>
+
+      <form [formGroup]="hashInputForm" novalidate>
+        <mat-form-field>
+          <input matInput formControlName="password" placeholder="Passwort Eingabe" type="password"
+            [(ngModel)]="hashGenerator.password256" required />
+        </mat-form-field>
+
+        <button mat-button type="submit" [disabled]="!hashInputForm.valid" (click)="createSHA_256()" color="primary">
+          Hash generieren <mat-icon>create</mat-icon>
+        </button>
+      </form>
+
+      <div id="hashOutput256" style="display: none">
+        <mat-form-field>
+          <input matInput placeholder="SHA512 Hash von Passwort" [(ngModel)]="hashGenerator.hash256"
+            [ngModelOptions]="{ standalone: true }" type="text" disabled readonly />
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
