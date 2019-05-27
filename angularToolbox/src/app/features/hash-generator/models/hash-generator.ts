@@ -1,4 +1,6 @@
 export class HashGenerator {
-  password: String;
-  hash: String;
+  password256: string;
+  hash256: string;
+  password512: string;
+  hash512: string;
 }

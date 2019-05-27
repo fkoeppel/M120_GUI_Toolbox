@@ -1,0 +1,21 @@
+.container {
+  padding-top: 50px;
+}
+
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+#mat-expansion-panel-header-0>span.mat-content>mat-panel-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+@media(min-width: 900px) {
+  mat-form-field {
+    width: 80%;
+  }
+
+}
