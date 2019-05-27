@@ -27,21 +27,25 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
   matcher: IsDirtyErrorStateMatcher;
 
   constructor() {
+    this.defaultForm();
     this.generateEnabled$ = new BehaviorSubject<boolean>(true);
     this.coordinates = new Array<Coordinate>();
-    this.coordinates.push(new Coordinate(0, 0));
-    this.defaultForm();
     this.matcher = new IsDirtyErrorStateMatcher();
-
-    for (let index = 0; index < 30; index++) {
-      this.coordinates.push(new Coordinate(1, index));
-    }
-
     this.coordinates$ = new BehaviorSubject<Coordinate[]>(this.coordinates);
+
+    this.coordinates.push(new Coordinate(0, 0));
+    this.createDefaultCoordinates();
+
     this.coordinates$.subscribe(() => {
       this.generateEnabled$.next(this.isGenerateEnabled(this.coordinates));
       console.log(this.generateEnabled$.getValue());
     });
+  }
+
+  private createDefaultCoordinates() {
+    for (let index = 0; index < 30; index++) {
+      this.coordinates.push(new Coordinate(1, index));
+    }
   }
 
   ngOnInit() {}
@@ -68,11 +72,11 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  public hasError = (controlName: string, errorName: string) => {
+  hasError = (controlName: string, errorName: string) => {
     return this.coordinateForm.controls[controlName].hasError(errorName);
   }
 
-  public createCoordinate = coordinateValue => {
+  createCoordinate = coordinateValue => {
     if (this.coordinateForm.valid) {
       this.executeCoordinateCreation(coordinateValue);
       this.defaultForm();
