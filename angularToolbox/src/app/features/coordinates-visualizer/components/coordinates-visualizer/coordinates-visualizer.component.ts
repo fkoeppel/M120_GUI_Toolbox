@@ -3,14 +3,8 @@ import { Coordinate } from '../../models/coordinate';
 import * as $ from 'jquery';
 import { BehaviorSubject } from 'rxjs';
 import { CoordinateForm } from '../../models/coordinate-form';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-
-export class IsDirtyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return !!(control && control.invalid && control.dirty);
-  }
-}
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IsDirtyErrorStateMatcher } from '../../shared/IsDirtyErrorStateMatcher';
 
 @Component({
   selector: 'app-coordinates-visualizer',
