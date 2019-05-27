@@ -1,7 +1,4 @@
-<form [formGroup]="coordinateForm"
-  autocomplete="off"
-  novalidate
-  class="input form"
+<form [formGroup]="coordinateForm" autocomplete="off" novalidate class="input form"
   (ngSubmit)="createCoordinate(coordinateForm.value)">
 
   <mat-form-field>
@@ -10,9 +7,8 @@
       type="text"
       placeholder="X"
       #inputX
-      [errorStateMatcher]="matcher"
-      pattern="\d*"
-      maxlength="3">
+      maxlength="3"
+      [errorStateMatcher]="matcher">
     <mat-hint align="end">{{inputX.value.length}} / 3</mat-hint>
     <mat-error *ngIf="hasError('inputX', 'required')">X is required</mat-error>
     <mat-error *ngIf="hasError('inputX', 'maxlength')">You have more than 3 characters</mat-error>
@@ -23,7 +19,6 @@
 
   <mat-form-field>
     <input matInput
-      pattern="\d*"
       formControlName="inputY"
       type="text"
       placeholder="Y"
@@ -38,28 +33,20 @@
     <mat-error *ngIf="hasError('inputY', 'pattern')">Only numeric values are allowed</mat-error>
   </mat-form-field>
 
-  <button type="submit"
-    mat-raised-button
-    [disabled]="!coordinateForm.valid">Add</button>
+  <button type="submit" mat-raised-button [disabled]="!coordinateForm.valid">Add</button>
 
-  <button mat-raised-button
-    class="button-generate"
-    [disabled]="!(generateEnabled$ | async)"
+  <button mat-raised-button class="button-generate" [disabled]="!(generateEnabled$ | async)"
     (click)="generate()">Generate</button>
 
 </form>
 
 <div class="output">
-  <mat-chip-list #chipList>
-    <mat-chip *ngFor="let coordinate of coordinates$ | async"
-      [selectable]="selectable">
-      X: {{ coordinate.X }} Y: {{ coordinate.Y }}
-      <mat-icon matChipRemove
-        (click)="remove(coordinate)">cancel</mat-icon>
-    </mat-chip>
-  </mat-chip-list>
+  <div *ngFor="let coordinate of coordinates">
+    <span>X:{{ coordinate.X }}</span>
+    <span> </span>
+    <span>Y:{{ coordinate.Y }}</span>
+  </div>
 </div>
 
 
-<div class="visual"
-  id="visualisation"></div>
+<div class="visual" id="visualisation"></div>
