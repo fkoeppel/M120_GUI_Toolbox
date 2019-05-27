@@ -10,9 +10,8 @@
       type="text"
       placeholder="X"
       #inputX
-      [errorStateMatcher]="matcher"
-      pattern="\d*"
-      maxlength="3">
+      maxlength="3"
+      [errorStateMatcher]="matcher">
     <mat-hint align="end">{{inputX.value.length}} / 3</mat-hint>
     <mat-error *ngIf="hasError('inputX', 'required')">X is required</mat-error>
     <mat-error *ngIf="hasError('inputX', 'maxlength')">You have more than 3 characters</mat-error>
@@ -23,7 +22,6 @@
 
   <mat-form-field>
     <input matInput
-      pattern="\d*"
       formControlName="inputY"
       type="text"
       placeholder="Y"

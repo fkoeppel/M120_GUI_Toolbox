@@ -1,17 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Coordinate } from '../../models/coordinate';
 import * as $ from 'jquery';
-import { CoordinateForm } from '../../models/coordinate-form';
-import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-
-import { ErrorStateMatcher } from '@angular/material/core';
 import { BehaviorSubject } from 'rxjs';
-
-export class IsDirtyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return !!(control && control.invalid && control.dirty);
-  }
-}
+import { CoordinateForm } from '../../models/coordinate-form';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IsDirtyErrorStateMatcher } from '../../shared/IsDirtyErrorStateMatcher';
 
 @Component({
   selector: 'app-coordinates-visualizer',
@@ -20,35 +13,36 @@ export class IsDirtyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
   coordinates$: BehaviorSubject<Coordinate[]>;
-  coordinates: Coordinate[];
-  grid: String[][];
-  visualTable: string;
+  private coordinates: Coordinate[];
+  private grid: String[][];
+  private visualTable: string;
   generateEnabled$: BehaviorSubject<boolean>;
-
-  public coordinateForm: FormGroup;
-
-  lowestX: number;
-  highestY: number;
-  lengthX: number;
-  lengthY: number;
+  coordinateForm: FormGroup;
+  private lowestX: number;
+  private highestY: number;
+  private lengthX: number;
+  private lengthY: number;
   matcher: IsDirtyErrorStateMatcher;
 
   constructor() {
+    this.defaultForm();
     this.generateEnabled$ = new BehaviorSubject<boolean>(true);
     this.coordinates = new Array<Coordinate>();
-    this.coordinates.push(new Coordinate(0, 0));
-    this.defaultForm();
     this.matcher = new IsDirtyErrorStateMatcher();
+    this.coordinates$ = new BehaviorSubject<Coordinate[]>(this.coordinates);
 
+    this.coordinates.push(new Coordinate(0, 0));
+    // this.createDefaultCoordinates();
+
+    this.coordinates$.subscribe(() => {
+      this.generateEnabled$.next(this.isGenerateEnabled(this.coordinates));
+    });
+  }
+
+  private createDefaultCoordinates() {
     for (let index = 0; index < 30; index++) {
       this.coordinates.push(new Coordinate(1, index));
     }
-
-    this.coordinates$ = new BehaviorSubject<Coordinate[]>(this.coordinates);
-    this.coordinates$.subscribe(() => {
-      this.generateEnabled$.next(this.isGenerateEnabled(this.coordinates));
-      console.log(this.generateEnabled$.getValue());
-    });
   }
 
   ngOnInit() {}
@@ -75,11 +69,11 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  public hasError = (controlName: string, errorName: string) => {
+  hasError = (controlName: string, errorName: string) => {
     return this.coordinateForm.controls[controlName].hasError(errorName);
   }
 
-  public createCoordinate = coordinateValue => {
+  createCoordinate = coordinateValue => {
     if (this.coordinateForm.valid) {
       this.executeCoordinateCreation(coordinateValue);
       this.defaultForm();
@@ -101,33 +95,26 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.maxLength(3),
         Validators.max(99),
-        Validators.min(-99)
+        Validators.min(-99),
+        Validators.pattern('-?[0-9]*')
       ]),
       inputY: new FormControl(null, [
         Validators.required,
         Validators.maxLength(3),
         Validators.max(99),
-        Validators.min(-99)
+        Validators.min(-99),
+        Validators.pattern('-?[0-9]*')
       ])
     });
   }
 
-  async generate() {
-    console.log('1');
-    await this.createVisualGrid().then(grid => {
-      this.grid = grid;
-      console.log('buildingGridFinisched');
-    });
-    console.log('2');
-    await this.createVisualTableFromGrid().then(table => {
-      this.visualTable = table;
-      console.log('buildingVisualFinisched');
-    });
+  generate() {
+    this.grid = this.createVisualGrid();
+    this.visualTable = this.createVisualTableFromGrid();
     $('#visualisation').html(this.visualTable);
-    return 1;
   }
 
-  async createVisualGrid() {
+  createVisualGrid() {
     let highestX = 0;
     let highestY = 0;
     let lowestX = 0;
@@ -193,27 +180,27 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     return grid;
   }
 
-  async createVisualTableFromGrid() {
+  createVisualTableFromGrid() {
     return this.createTables();
   }
 
-  private async createTables() {
+  private createTables() {
     let html = '<table>';
-    html = await this.createRows(html);
+    html = this.createRows(html);
     html = html + '</table>';
     return html;
   }
 
-  private async createRows(html: string) {
+  private createRows(html: string) {
     for (let i = 0; i < this.lengthY; i++) {
       html = html + '<tr>';
-      html = await this.createColumns(html, i);
+      html = this.createColumns(html, i);
       html = html + '</tr>';
     }
     return html;
   }
 
-  private async createColumns(html: string, i: number) {
+  private createColumns(html: string, i: number) {
     for (let j = 0; j < this.lengthX; j++) {
       html = html + '<th max-width: 3px;>|</th>';
       if (this.grid[j][i] == null || this.grid[j][i] == '') {
