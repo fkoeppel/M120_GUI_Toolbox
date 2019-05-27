@@ -15,6 +15,7 @@ import { CoordinatesVisualizerService } from './features/coordinates-visualizer/
 import { HashGeneratorService } from './features/hash-generator/services/hash-generator.service';
 import { MaterialModule } from './features/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PythagorasComponent } from './features/pythagoras/components/pythagoras/pythagoras.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavigationComponent,
     CoordinatesVisualizerComponent,
     MetricUnitsComponent,
-    HashGeneratorComponent
+    HashGeneratorComponent,
+    PythagorasComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialModule, BrowserAnimationsModule],
   providers: [
