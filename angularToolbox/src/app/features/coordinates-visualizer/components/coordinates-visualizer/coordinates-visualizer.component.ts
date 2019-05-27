@@ -14,8 +14,8 @@ import { IsDirtyErrorStateMatcher } from '../../shared/IsDirtyErrorStateMatcher'
 export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
   coordinates$: BehaviorSubject<Coordinate[]>;
   private coordinates: Coordinate[];
-  private grid: String[][];
-  private visualTable: string;
+  private grid: string[][];
+  visualTable$: BehaviorSubject<string>;
   generateEnabled$: BehaviorSubject<boolean>;
   coordinateForm: FormGroup;
   private lowestX: number;
@@ -24,9 +24,16 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
   private lengthY: number;
   matcher: IsDirtyErrorStateMatcher;
 
+  table: HTMLTableElement;
+  tr: HTMLTableRowElement;
+  th: HTMLTableHeaderCellElement;
+  container: Element;
+  documentFragment: DocumentFragment;
+
   constructor() {
     this.defaultForm();
     this.generateEnabled$ = new BehaviorSubject<boolean>(true);
+    this.visualTable$ = new BehaviorSubject<string>('');
     this.coordinates = new Array<Coordinate>();
     this.matcher = new IsDirtyErrorStateMatcher();
     this.coordinates$ = new BehaviorSubject<Coordinate[]>(this.coordinates);
@@ -37,6 +44,53 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     this.coordinates$.subscribe(() => {
       this.generateEnabled$.next(this.isGenerateEnabled(this.coordinates));
     });
+  }
+
+  createVisualTableFromGrid() {
+    console.log('Start' + Date.now().toLocaleString());
+    this.table = document.createElement('table');
+    this.tr = document.createElement('tr');
+    this.th = document.createElement('th');
+    this.container = document.querySelector('#visualisation');
+    this.documentFragment = document.createDocumentFragment();
+    return this.createTables();
+  }
+
+  private createTables() {
+    const tableClone = this.table.cloneNode(true);
+    for (let i = 0; i < this.lengthY; i++) {
+      const tr = this.tr.cloneNode(true);
+      for (let j = 0; j < this.lengthX; j++) {
+        const th = this.th.cloneNode(true) as HTMLTableHeaderCellElement;
+        th.textContent = '|';
+        tr.appendChild(th);
+        if (this.grid[j][i] == null || this.grid[j][i] == '') {
+          const th = this.th.cloneNode(true) as HTMLTableHeaderCellElement;
+          th.textContent = '-';
+          th.setAttribute('class', 'column');
+          tr.appendChild(th);
+        } else {
+          const koo = this.grid[j][i];
+          const th = this.th.cloneNode(true) as HTMLTableHeaderCellElement;
+          th.textContent = koo;
+          th.setAttribute('class', 'column');
+          tr.appendChild(th);
+        }
+      }
+      const th = this.th.cloneNode(true) as HTMLTableHeaderCellElement;
+      th.textContent = '|';
+      tr.appendChild(th);
+
+      tableClone.appendChild(tr);
+    }
+    this.documentFragment.appendChild(tableClone);
+    this.container.innerHTML = '';
+    console.log('End' + Date.now().toLocaleString());
+    console.log(this.documentFragment.textContent);
+    this.visualTable$.next(this.documentFragment.textContent);
+    console.log('Start dom Manipulating' + Date.now().toLocaleString());
+    this.container.appendChild(this.documentFragment);
+    console.log('End dom Manipulating' + Date.now().toLocaleString());
   }
 
   private createDefaultCoordinates() {
@@ -93,16 +147,16 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     this.coordinateForm = new FormGroup({
       inputX: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(3),
-        Validators.max(99),
-        Validators.min(-99),
+        Validators.maxLength(50),
+        Validators.max(10000000),
+        Validators.min(-10000000),
         Validators.pattern('-?[0-9]*')
       ]),
       inputY: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(3),
-        Validators.max(99),
-        Validators.min(-99),
+        Validators.maxLength(50),
+        Validators.max(10000000),
+        Validators.min(-10000000),
         Validators.pattern('-?[0-9]*')
       ])
     });
@@ -110,8 +164,8 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
 
   generate() {
     this.grid = this.createVisualGrid();
-    this.visualTable = this.createVisualTableFromGrid();
-    $('#visualisation').html(this.visualTable);
+    this.visualTable$.next(this.createVisualTableFromGridInnerHtml());
+    $('#visualisation').html(this.visualTable$.getValue());
   }
 
   createVisualGrid() {
@@ -145,10 +199,10 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     const xHeight: number = +highestX + +lowestX + 1;
     const yHeight: number = +highestY + +lowestY + 1;
 
-    const grid = new Array<String[]>(xHeight);
+    const grid = new Array<string[]>(xHeight);
 
     for (let index = 0; index < xHeight; index++) {
-      grid[index] = new Array<String>(yHeight);
+      grid[index] = new Array<string>(yHeight);
     }
 
     this.coordinates.forEach(function(coordinate) {
@@ -180,11 +234,11 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
     return grid;
   }
 
-  createVisualTableFromGrid() {
-    return this.createTables();
+  createVisualTableFromGridInnerHtml() {
+    return this.createTablesInnerHtml();
   }
 
-  private createTables() {
+  private createTablesInnerHtml() {
     let html = '<table>';
     html = this.createRows(html);
     html = html + '</table>';
@@ -202,7 +256,7 @@ export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
 
   private createColumns(html: string, i: number) {
     for (let j = 0; j < this.lengthX; j++) {
-      html = html + '<th max-width: 3px;>|</th>';
+      html = html + '<th>|</th>';
       if (this.grid[j][i] == null || this.grid[j][i] == '') {
         html = html + '<th style="text-align: center;min-width: 40px;">-</th>';
       } else {
