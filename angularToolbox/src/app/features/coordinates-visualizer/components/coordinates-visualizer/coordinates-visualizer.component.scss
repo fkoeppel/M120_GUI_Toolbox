@@ -1,39 +1,37 @@
 :host {
   display: grid;
   grid-gap: 20px;
-  height: 94.6vh;
   grid-template:
-    "  .  input   visual ." auto
-    "  .  output  visual ." 300px
-    "  .  .       visual ." auto
+    ".  input   visual ." auto
+    ".  output  visual ." 300px
+    ".  .       visual ." auto
     / auto 200px 1fr auto;
 }
 
-.input-x {
-  grid-area: input-x;
-}
-
-.input-y {
-  grid-area: input-y;
+.input {
+  grid-area: input;
 }
 
 .output {
   grid-area: output;
-}
-
-.button-add {
-  grid-area: button-add;
-}
-
-.button-generate {
-  grid-area: button-generate;
-}
-
-.coordinates {
-  grid-area: coordinates;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .visual {
   grid-area: visual;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.form {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.padding-right {
+  margin-right: 10px;
+}
+
+.no-click {
+  pointer-events: none;
 }
