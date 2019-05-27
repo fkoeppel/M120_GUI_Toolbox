@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormsModule,
   FormBuilder,
   Validators,
   ReactiveFormsModule
-} from "@angular/forms";
+} from '@angular/forms';
 
 // IMPORTS FOR HASHING LIBRARIES
-import * as sha512 from "js-sha512";
-import { HashGenerator } from "../../models/hash-generator";
-import * as shajs from "sha.js";
+import * as sha512 from 'js-sha512';
+import { HashGenerator } from '../../models/hash-generator';
+import * as shajs from 'sha.js';
 
 @Component({
-  selector: "app-hash-generator",
-  templateUrl: "./hash-generator.component.html",
-  styleUrls: ["./hash-generator.component.scss"]
+  selector: 'app-hash-generator',
+  templateUrl: './hash-generator.component.html',
+  styleUrls: ['./hash-generator.component.scss']
 })
 export class HashGeneratorComponent implements OnInit {
   hashGenerator: HashGenerator;
@@ -34,11 +34,11 @@ export class HashGeneratorComponent implements OnInit {
 
   createSHA_512() {
     this.hashGenerator.hash512 = sha512.sha512(this.hashGenerator.password512);
-    document.getElementById("hashOutput512").style.display = "block";
+    document.getElementById('hashOutput512').style.display = 'block';
   }
 
   createSHA_256() {
-    var sha256 = require("js-sha256");
+    const sha256 = require('js-sha256');
 
     this.hashGenerator.hash256 = sha256(this.hashGenerator.password256);
     /*
@@ -48,6 +48,6 @@ export class HashGeneratorComponent implements OnInit {
       .update(this.hashGenerator.password256)
       .digest("hex");
       */
-    document.getElementById("hashOutput256").style.display = "block";
+    document.getElementById('hashOutput256').style.display = 'block';
   }
 }
