@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Coordinate } from '../../models/coordinate';
 import * as $ from 'jquery';
 import { CoordinateForm } from '../../models/coordinate-form';
@@ -18,11 +18,12 @@ export class IsDirtyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './coordinates-visualizer.component.html',
   styleUrls: ['./coordinates-visualizer.component.scss']
 })
-export class CoordinatesVisualizerComponent implements OnInit {
+export class CoordinatesVisualizerComponent implements OnInit, OnDestroy {
   coordinates$: BehaviorSubject<Coordinate[]>;
   coordinates: Coordinate[];
   grid: String[][];
   visualTable: string;
+  generateEnabled$: BehaviorSubject<boolean>;
 
   public coordinateForm: FormGroup;
 
@@ -33,6 +34,7 @@ export class CoordinatesVisualizerComponent implements OnInit {
   matcher: IsDirtyErrorStateMatcher;
 
   constructor() {
+    this.generateEnabled$ = new BehaviorSubject<boolean>(true);
     this.coordinates = new Array<Coordinate>();
     this.coordinates.push(new Coordinate(0, 0));
     this.defaultForm();
@@ -43,9 +45,17 @@ export class CoordinatesVisualizerComponent implements OnInit {
     }
 
     this.coordinates$ = new BehaviorSubject<Coordinate[]>(this.coordinates);
+    this.coordinates$.subscribe(() => {
+      this.generateEnabled$.next(this.isGenerateEnabled(this.coordinates));
+      console.log(this.generateEnabled$.getValue());
+    });
   }
 
   ngOnInit() {}
+
+  ngOnDestroy(): void {
+    this.coordinates$.unsubscribe();
+  }
 
   remove(coordinate: Coordinate) {
     const newCoordinates = this.coordinates.filter(element => {
@@ -56,6 +66,13 @@ export class CoordinatesVisualizerComponent implements OnInit {
     });
     this.coordinates = newCoordinates;
     this.coordinates$.next(newCoordinates);
+  }
+
+  private isGenerateEnabled(coordinates: Coordinate[]): boolean {
+    if (coordinates.length <= 0) {
+      return false;
+    }
+    return true;
   }
 
   public hasError = (controlName: string, errorName: string) => {
@@ -75,12 +92,23 @@ export class CoordinatesVisualizerComponent implements OnInit {
       inputY: coordinateValue.inputY
     };
     this.coordinates.unshift(new Coordinate(formValue.inputX, formValue.inputY));
+    this.coordinates$.next(this.coordinates);
   }
 
   private defaultForm() {
     this.coordinateForm = new FormGroup({
-      inputX: new FormControl('', [Validators.required, Validators.maxLength(2)]),
-      inputY: new FormControl('', [Validators.required, Validators.maxLength(2)])
+      inputX: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(3),
+        Validators.max(99),
+        Validators.min(-99)
+      ]),
+      inputY: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(3),
+        Validators.max(99),
+        Validators.min(-99)
+      ])
     });
   }
 

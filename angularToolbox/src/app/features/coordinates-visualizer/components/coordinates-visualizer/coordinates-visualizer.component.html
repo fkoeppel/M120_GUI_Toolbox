@@ -12,11 +12,13 @@
       #inputX
       [errorStateMatcher]="matcher"
       pattern="\d*"
-      maxlength="2">
-    <mat-hint align="end">{{inputX.value.length}} / 2</mat-hint>
-    <mat-error *ngIf="hasError('inputY', 'pattern')">Only numbers are allowed</mat-error>
+      maxlength="3">
+    <mat-hint align="end">{{inputX.value.length}} / 3</mat-hint>
     <mat-error *ngIf="hasError('inputX', 'required')">X is required</mat-error>
-    <mat-error *ngIf="hasError('inputX', 'maxlength')">You have more than 2 characters</mat-error>
+    <mat-error *ngIf="hasError('inputX', 'maxlength')">You have more than 3 characters</mat-error>
+    <mat-error *ngIf="hasError('inputX', 'max')">Max value is 99</mat-error>
+    <mat-error *ngIf="hasError('inputX', 'min')">Min value is -99</mat-error>
+    <mat-error *ngIf="hasError('inputX', 'pattern')">Only numeric values are allowed</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -26,12 +28,14 @@
       type="text"
       placeholder="Y"
       #inputY
-      [errorStateMatcher]="matcher"
-      maxlength="2">
-    <mat-hint align="end">{{inputY.value.length}} / 2</mat-hint>
-    <mat-error *ngIf="hasError('inputY', 'pattern')">Only numbers are allowed</mat-error>
+      maxlength="3"
+      [errorStateMatcher]="matcher">
+    <mat-hint align="end">{{inputY.value.length}} / 3</mat-hint>
     <mat-error *ngIf="hasError('inputY', 'required')">Y is required</mat-error>
-    <mat-error *ngIf="hasError('inputY', 'maxlength')">You have more than 2 characters</mat-error>
+    <mat-error *ngIf="hasError('inputY', 'maxlength')">You have more than 3 characters</mat-error>
+    <mat-error *ngIf="hasError('inputY', 'max')">Max value is 99</mat-error>
+    <mat-error *ngIf="hasError('inputY', 'min')">Min value is -99</mat-error>
+    <mat-error *ngIf="hasError('inputY', 'pattern')">Only numeric values are allowed</mat-error>
   </mat-form-field>
 
   <button type="submit"
@@ -40,6 +44,7 @@
 
   <button mat-raised-button
     class="button-generate"
+    [disabled]="!(generateEnabled$ | async)"
     (click)="generate()">Generate</button>
 
 </form>
