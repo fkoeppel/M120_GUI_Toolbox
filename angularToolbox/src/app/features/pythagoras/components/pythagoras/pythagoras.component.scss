@@ -3,6 +3,17 @@
     color: #673fb4;
 }
 
+#tri {
+    width: 0;
+    height: 0;
+    border-top-width: 100px;
+    border-top-style: solid;
+    border-top-color: transparent;
+    border-right-width: 100px;
+    border-right-style: solid;
+    border-right-color: #673fb4;
+}
+
 .form {
     padding-left: 100px;
     padding-top: 50px;
