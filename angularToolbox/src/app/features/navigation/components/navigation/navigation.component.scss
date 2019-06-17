@@ -1,8 +1,17 @@
 .mat-toolbar {
+  background-color: #666;
+  box-shadow: 20px 2px 20px #666;
+  padding: 0;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 15px;
 
   .nav-link {
     color: #444;
     font-weight: normal;
+    color: white;
+    transition: all .3s ease-in-out;
+    display: block;
   }
 
   .nav-link-container {
@@ -10,6 +19,9 @@
     margin-left: auto;
   }
 
-  .nav-link:hover {}
+  .nav-link:hover {
+    transform: scale(0.8);
+    text-decoration: none;
+  }
 
 }
