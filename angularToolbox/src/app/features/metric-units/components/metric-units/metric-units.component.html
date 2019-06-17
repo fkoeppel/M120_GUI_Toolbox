@@ -1,27 +1,28 @@
 <form class="form">
-    <h1>Metric Units</h1>
-    <mat-form-field name="numb">
-        <input [(ngModel)]="numb" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Value" />
-    </mat-form-field>
-    <span>&nbsp;</span>
-    <mat-form-field>
-        <mat-label>From</mat-label>
-        <mat-select [(ngModel)]="from" name="from_select">
-            <mat-option *ngFor="let unit of units" [value]="unit.value">
-                {{ unit.viewValue }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <span style="font-size: 20px; color: #673fb4;">&nbsp;{{ calc() }}&nbsp;</span>
-    <mat-form-field>
-        <mat-label>To</mat-label>
-        <mat-select [(ngModel)]="to" name="to_select">
-            <mat-option *ngFor="let unit of units" [value]="unit.value">
-                {{ unit.viewValue }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <!-- <p class="result">
+  <mat-form-field name="numb">
+    <input [(ngModel)]="numb" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Wert" />
+  </mat-form-field>
+  <span>&nbsp;</span>
+  <mat-form-field>
+    <mat-label>Von</mat-label>
+    <mat-select [(ngModel)]="from" name="from_select">
+      <mat-option *ngFor="let unit of units" [value]="unit.value">
+        {{ unit.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="inputTo">
+    <mat-label>Zu</mat-label>
+    <mat-select [(ngModel)]="to" name="to_select">
+      <mat-option *ngFor="let unit of units" [value]="unit.value">
+        {{ unit.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <span class="output">&nbsp;{{ calc() }}&nbsp;</span>
+  <!-- <p class="result">
         {{ numb }} <span style="color: red">{{ getName(from) }}</span> {{ calc() }}
         <span style="color: red">{{ getName(to) }}</span>
     </p> -->
