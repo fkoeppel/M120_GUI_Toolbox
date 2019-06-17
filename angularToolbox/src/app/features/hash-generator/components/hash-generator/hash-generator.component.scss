@@ -7,15 +7,21 @@
   flex-basis: 0;
 }
 
-#mat-expansion-panel-header-0>span.mat-content>mat-panel-description {
+#mat-expansion-panel-header-0 > span.mat-content > mat-panel-description {
   justify-content: space-between;
   align-items: center;
 }
 
+.generieren {
+  margin-left: 10px;
+}
 
-@media(min-width: 900px) {
+.icon {
+  margin-left: 3px;
+}
+
+@media (min-width: 900px) {
   mat-form-field {
     width: 80%;
   }
-
 }

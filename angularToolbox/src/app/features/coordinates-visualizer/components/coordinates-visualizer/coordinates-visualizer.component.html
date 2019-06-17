@@ -52,8 +52,7 @@
 <div class="output">
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let coordinate of coordinates$ | async"
-      [selectable]="selectable"
-      color='accent'>
+      [selectable]="selectable">
       X: {{ coordinate.X }} Y: {{ coordinate.Y }}
       <mat-icon matChipRemove
         (click)="remove(coordinate)">cancel</mat-icon>
