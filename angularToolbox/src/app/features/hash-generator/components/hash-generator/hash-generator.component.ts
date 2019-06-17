@@ -10,7 +10,7 @@ import {
 // IMPORTS FOR HASHING LIBRARIES
 import * as sha512 from "js-sha512";
 import { HashGenerator } from "../../models/hash-generator";
-import * as shajs from "sha.js";
+import { sha256 } from "js-sha256";
 
 @Component({
   selector: "app-hash-generator",
@@ -38,8 +38,6 @@ export class HashGeneratorComponent implements OnInit {
   }
 
   createSHA_256() {
-    var sha256 = require("js-sha256");
-
     this.hashGenerator.hash256 = sha256(this.hashGenerator.password256);
     /*
 
