@@ -1,3 +1,38 @@
-<p>
-  pythagoras works!
-</p>
+<form class="form">
+    <h1 class="rainbow">Pythagoras</h1>
+    <h3>Fist Side</h3>
+    <mat-form-field name="numb1">
+        <input [(ngModel)]="numb1" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Value" />
+    </mat-form-field>
+    <span>&nbsp;</span>
+    <mat-form-field>
+        <mat-label>First Side</mat-label>
+        <mat-select [(ngModel)]="first" name="first_select">
+            <mat-option *ngFor="let side of sides" [value]="side.value">
+                {{ side.viewValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <h3>Second Side</h3>
+    <mat-form-field name="numb2">
+        <input [(ngModel)]="numb2" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Value" />
+    </mat-form-field>
+    <span>&nbsp;</span>
+    <mat-form-field>
+        <mat-label>Second Side</mat-label>
+        <mat-select [(ngModel)]="second" name="second_select">
+            <mat-option *ngFor="let side of sides" [value]="side.value">
+                {{ side.viewValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <h3 class="result">Result:&nbsp;{{ calc() }}&nbsp;</h3>
+    <div
+        id="tri"
+        style="width: 0; height: 0; border-top-width: 100px; border-top-style: solid; border-top-color: transparent; border-right-width: 100px; border-right-style: solid; border-right-color: blue;"
+    ></div>
+</form>
+
+<div class="visual">
+    <canvas id="canvas"></canvas>
+</div>
