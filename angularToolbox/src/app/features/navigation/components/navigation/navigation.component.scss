@@ -3,7 +3,6 @@
   .nav-link {
     color: white;
     font-weight: normal;
-    color: white;
     transition: all .3s ease-in-out;
     display: block;
   }
@@ -14,8 +13,15 @@
   }
 
   .nav-link:hover {
-    transform: scale(0.9);
+    transform: scale(1.1);
     text-decoration: none;
+  }
+
+  .active {
+    //color: #888;
+    border-bottom-color: white;
+    border-bottom-style: solid;
+    border-bottom-width: 1.5px;
   }
 
 }

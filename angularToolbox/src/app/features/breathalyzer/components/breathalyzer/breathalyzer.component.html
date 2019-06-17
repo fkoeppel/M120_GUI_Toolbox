@@ -1,14 +1,9 @@
-<div class='padding'>
-  <div class="p"
-    (click)="checkDrink()"
-    style="width:100%">
-    <h2>Informationen zur Person</h2>
-
+<div class='container margin-top'>
+  <div class="p" (click)="checkDrink()" style="width:100%">
+    <h5>Informationen zur Person</h5>
     <mat-form-field>
       <mat-label>Geschlecht</mat-label>
-      <select matNativeControl
-        color='primary'
-        id="geschlaecht">
+      <select matNativeControl color='primary' id="geschlaecht">
         <option value="m">Männlich</option>
         <option value="w">Weiblich</option>
       </select>
@@ -17,22 +12,15 @@
 
     <br>
     <mat-form-field>
-      <input matInput
-        color='primary'
-        id="gewicht"
-        type="number"
-        value='60.0'
-        placeholder='Gewicht' />
+      <input matInput color='primary' id="gewicht" type="number" value='60.0' placeholder='Gewicht' />
     </mat-form-field>
+
 
     <br>
 
     <mat-form-field>
       <mat-label>Anzahl untersch. Getränke</mat-label>
-      <select [(ngModel)]="selectedOption"
-        color='primary'
-        matNativeControl
-        id="anzahlGetraenke">
+      <select [(ngModel)]="selectedOption" color='primary' matNativeControl id="anzahlGetraenke">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -45,301 +33,158 @@
     </mat-form-field>
 
 
+    <h5 id="result" style="display: none;">Promillewert der Person: <span>{{ result }}</span></h5>
+
+
     <br>
     <br>
   </div>
-  <div class="p"
-    style="width:100%">
-    <h2>Getränke</h2>
-
-
-    <div class="p"
-      id="g1"
-      *ngIf="this.isDrink1Visible">
+  <div class="p" style="width:100%">
+    <div class="p" id="g1" *ngIf="this.isDrink1Visible">
       <h3>Getränk 1</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g1anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g1anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g1liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g1liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g1volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g1volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
 
 
-    <div class="p"
-      id="g2"
-      *ngIf="this.isDrink2Visible">
+    <div class="p" id="g2" *ngIf="this.isDrink2Visible">
       <h3>Getränk 2</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g2anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g2anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g2liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g2liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g2volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g2volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
 
 
-    <div class="p"
-      id="g3"
-      *ngIf="this.isDrink3Visible">
+    <div class="p" id="g3" *ngIf="this.isDrink3Visible">
       <h3>Getränk 3</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g3anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g3anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g3liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g3liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g3volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g3volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
-    <div class="p"
-      id="g4"
-      *ngIf="this.isDrink4Visible">
+    <div class="p" id="g4" *ngIf="this.isDrink4Visible">
       <h3>Getränk 4</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g4anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g4anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g4liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g4liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g4volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g4volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
-    <div class="p"
-      id="g5"
-      *ngIf="this.isDrink5Visible">
+    <div class="p" id="g5" *ngIf="this.isDrink5Visible">
       <h3>Getränk 5</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g5anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g5anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g5liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g5liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g5volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g5volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
-    <div class="p"
-      id="g6"
-      *ngIf="this.isDrink6Visible">
+    <div class="p" id="g6" *ngIf="this.isDrink6Visible">
       <h3>Getränk 6</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g6anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g6anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g6liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g6liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g6volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g6volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
-    <div class="p"
-      id="g7"
-      *ngIf="this.isDrink7Visible">
+    <div class="p" id="g7" *ngIf="this.isDrink7Visible">
       <h3>Getränk 7</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g7anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g7anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g7liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g7liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g7volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g7volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
-    <div class="p"
-      id="g8"
-      *ngIf="this.isDrink8Visible">
+    <div class="p" id="g8" *ngIf="this.isDrink8Visible">
       <h3>Getränk 8</h3>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g8anzahl"
-          type="number"
-          step='1'
-          value='0'
-          placeholder='Anzahl dieses Getränks' />
+        <input matInput id="g8anzahl" type="number" step='1' value='0' placeholder='Anzahl dieses Getränks' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g8liter"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Liter in einem Getränk' />
+        <input matInput id="g8liter" type="number" step='0.1' value='0.0' placeholder='Liter in einem Getränk' />
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput
-          id="g8volume"
-          type="number"
-          step='0.1'
-          value='0.0'
-          placeholder='Volume des Getränks' />
+        <input matInput id="g8volume" type="number" step='0.1' value='0.0' placeholder='Volume des Getränks' />
       </mat-form-field>
       <br>
       <br>
     </div>
   </div>
-  <div class="p"
-    style="width:100%; margin-bottom: 20px">
+  <div class="p" style="width:100%; margin-bottom: 20px">
 
 
-    <button mat-raised-button
-      color="primary"
-      type="button"
-      (click)="calculate()">Calculate</button>
-
-
+    <button mat-raised-button color="primary" type="button" (click)="calculate()">Calculate</button>
 
   </div>
 </div>

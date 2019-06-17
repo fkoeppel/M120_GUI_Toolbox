@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-breathalyzer',
-  templateUrl: './breathalyzer.component.html',
-  styleUrls: ['./breathalyzer.component.scss']
+  selector: "app-breathalyzer",
+  templateUrl: "./breathalyzer.component.html",
+  styleUrls: ["./breathalyzer.component.scss"]
 })
 export class BreathalyzerComponent implements OnInit {
   private isDrink1Visible = true;
@@ -40,6 +40,8 @@ export class BreathalyzerComponent implements OnInit {
   g8liter: number;
   g8volume: number;
 
+  result: Number;
+
   selectedOption: String;
 
   constructor() {}
@@ -47,19 +49,21 @@ export class BreathalyzerComponent implements OnInit {
     console.log(this.selectedOption);
 
     if (this.selectedOption == undefined) {
-      this.selectedOption = '1';
+      this.selectedOption = "1";
     }
   }
 
   calculate() {
     let e;
-    e = document.getElementById('geschlaecht') as HTMLSelectElement;
+    e = document.getElementById("geschlaecht") as HTMLSelectElement;
     const geschlaecht = (e.options[e.selectedIndex] as HTMLSelectElement).value;
-    const gewicht = (document.getElementById('gewicht') as HTMLInputElement).value;
-    e = document.getElementById('anzahlGetraenke') as HTMLSelectElement;
-    const anzahlGetraenke = (e.options[e.selectedIndex] as HTMLSelectElement).value;
+    const gewicht = (document.getElementById("gewicht") as HTMLInputElement)
+      .value;
+    e = document.getElementById("anzahlGetraenke") as HTMLSelectElement;
+    const anzahlGetraenke = (e.options[e.selectedIndex] as HTMLSelectElement)
+      .value;
     let wassegehalt;
-    if (geschlaecht == 'm') {
+    if (geschlaecht == "m") {
       wassegehalt = 0.68;
     } else {
       wassegehalt = 0.55;
@@ -68,10 +72,16 @@ export class BreathalyzerComponent implements OnInit {
     let res = 0.0;
 
     switch (anzahlGetraenke) {
-      case '1': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
+      case "1": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
 
         res +=
           (this.g1liter * 100 * (this.g1volume / 100) * 0.8 * this.g1anzahl) /
@@ -79,18 +89,31 @@ export class BreathalyzerComponent implements OnInit {
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+
+        this.result = res;
+        $("#result").css("display", "block");
 
         break;
       }
-      case '2': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
-        this.g2anzahl = parseInt((document.getElementById('g2anzahl') as HTMLInputElement).value);
-        this.g2liter = parseInt((document.getElementById('g2liter') as HTMLInputElement).value);
-        this.g2volume = parseInt((document.getElementById('g2volume') as HTMLInputElement).value);
+      case "2": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
+        this.g2anzahl = parseInt(
+          (document.getElementById("g2anzahl") as HTMLInputElement).value
+        );
+        this.g2liter = parseInt(
+          (document.getElementById("g2liter") as HTMLInputElement).value
+        );
+        this.g2volume = parseInt(
+          (document.getElementById("g2volume") as HTMLInputElement).value
+        );
 
         res +=
           ((this.g1liter + this.g2liter) *
@@ -102,21 +125,40 @@ export class BreathalyzerComponent implements OnInit {
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+
+        this.result = res;
+        $("#result").css("display", "block");
 
         break;
       }
-      case '3': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
-        this.g2anzahl = parseInt((document.getElementById('g2anzahl') as HTMLInputElement).value);
-        this.g2liter = parseInt((document.getElementById('g2liter') as HTMLInputElement).value);
-        this.g2volume = parseInt((document.getElementById('g2volume') as HTMLInputElement).value);
-        this.g3anzahl = parseInt((document.getElementById('g3anzahl') as HTMLInputElement).value);
-        this.g3liter = parseInt((document.getElementById('g3liter') as HTMLInputElement).value);
-        this.g3volume = parseInt((document.getElementById('g3volume') as HTMLInputElement).value);
+      case "3": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
+        this.g2anzahl = parseInt(
+          (document.getElementById("g2anzahl") as HTMLInputElement).value
+        );
+        this.g2liter = parseInt(
+          (document.getElementById("g2liter") as HTMLInputElement).value
+        );
+        this.g2volume = parseInt(
+          (document.getElementById("g2volume") as HTMLInputElement).value
+        );
+        this.g3anzahl = parseInt(
+          (document.getElementById("g3anzahl") as HTMLInputElement).value
+        );
+        this.g3liter = parseInt(
+          (document.getElementById("g3liter") as HTMLInputElement).value
+        );
+        this.g3volume = parseInt(
+          (document.getElementById("g3volume") as HTMLInputElement).value
+        );
 
         res +=
           ((this.g1liter + this.g2liter + this.g3liter) *
@@ -128,92 +170,197 @@ export class BreathalyzerComponent implements OnInit {
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+
+        this.result = res;
+        $("#result").css("display", "block");
 
         break;
       }
-      case '4': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
-        this.g2anzahl = parseInt((document.getElementById('g2anzahl') as HTMLInputElement).value);
-        this.g2liter = parseInt((document.getElementById('g2liter') as HTMLInputElement).value);
-        this.g2volume = parseInt((document.getElementById('g2volume') as HTMLInputElement).value);
-        this.g3anzahl = parseInt((document.getElementById('g3anzahl') as HTMLInputElement).value);
-        this.g3liter = parseInt((document.getElementById('g3liter') as HTMLInputElement).value);
-        this.g3volume = parseInt((document.getElementById('g3volume') as HTMLInputElement).value);
-        this.g4anzahl = parseInt((document.getElementById('g4anzahl') as HTMLInputElement).value);
-        this.g4liter = parseInt((document.getElementById('g4liter') as HTMLInputElement).value);
-        this.g4volume = parseInt((document.getElementById('g4volume') as HTMLInputElement).value);
+      case "4": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
+        this.g2anzahl = parseInt(
+          (document.getElementById("g2anzahl") as HTMLInputElement).value
+        );
+        this.g2liter = parseInt(
+          (document.getElementById("g2liter") as HTMLInputElement).value
+        );
+        this.g2volume = parseInt(
+          (document.getElementById("g2volume") as HTMLInputElement).value
+        );
+        this.g3anzahl = parseInt(
+          (document.getElementById("g3anzahl") as HTMLInputElement).value
+        );
+        this.g3liter = parseInt(
+          (document.getElementById("g3liter") as HTMLInputElement).value
+        );
+        this.g3volume = parseInt(
+          (document.getElementById("g3volume") as HTMLInputElement).value
+        );
+        this.g4anzahl = parseInt(
+          (document.getElementById("g4anzahl") as HTMLInputElement).value
+        );
+        this.g4liter = parseInt(
+          (document.getElementById("g4liter") as HTMLInputElement).value
+        );
+        this.g4volume = parseInt(
+          (document.getElementById("g4volume") as HTMLInputElement).value
+        );
 
         res +=
           ((this.g1liter + this.g2liter + this.g3liter + this.g4liter) *
             100 *
-            ((this.g1volume + this.g2volume + this.g3volume + this.g4volume) / 100) *
+            ((this.g1volume + this.g2volume + this.g3volume + this.g4volume) /
+              100) *
             0.8 *
             (this.g1anzahl + this.g2anzahl + this.g3anzahl + this.g4anzahl)) /
           (+gewicht * wassegehalt);
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+
+        this.result = res;
+        $("#result").css("display", "block");
 
         break;
       }
-      case '5': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
-        this.g2anzahl = parseInt((document.getElementById('g2anzahl') as HTMLInputElement).value);
-        this.g2liter = parseInt((document.getElementById('g2liter') as HTMLInputElement).value);
-        this.g2volume = parseInt((document.getElementById('g2volume') as HTMLInputElement).value);
-        this.g3anzahl = parseInt((document.getElementById('g3anzahl') as HTMLInputElement).value);
-        this.g3liter = parseInt((document.getElementById('g3liter') as HTMLInputElement).value);
-        this.g3volume = parseInt((document.getElementById('g3volume') as HTMLInputElement).value);
-        this.g4anzahl = parseInt((document.getElementById('g4anzahl') as HTMLInputElement).value);
-        this.g4liter = parseInt((document.getElementById('g4liter') as HTMLInputElement).value);
-        this.g4volume = parseInt((document.getElementById('g4volume') as HTMLInputElement).value);
-        this.g5anzahl = parseInt((document.getElementById('g5anzahl') as HTMLInputElement).value);
-        this.g5liter = parseInt((document.getElementById('g5liter') as HTMLInputElement).value);
-        this.g5volume = parseInt((document.getElementById('g5volume') as HTMLInputElement).value);
+      case "5": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
+        this.g2anzahl = parseInt(
+          (document.getElementById("g2anzahl") as HTMLInputElement).value
+        );
+        this.g2liter = parseInt(
+          (document.getElementById("g2liter") as HTMLInputElement).value
+        );
+        this.g2volume = parseInt(
+          (document.getElementById("g2volume") as HTMLInputElement).value
+        );
+        this.g3anzahl = parseInt(
+          (document.getElementById("g3anzahl") as HTMLInputElement).value
+        );
+        this.g3liter = parseInt(
+          (document.getElementById("g3liter") as HTMLInputElement).value
+        );
+        this.g3volume = parseInt(
+          (document.getElementById("g3volume") as HTMLInputElement).value
+        );
+        this.g4anzahl = parseInt(
+          (document.getElementById("g4anzahl") as HTMLInputElement).value
+        );
+        this.g4liter = parseInt(
+          (document.getElementById("g4liter") as HTMLInputElement).value
+        );
+        this.g4volume = parseInt(
+          (document.getElementById("g4volume") as HTMLInputElement).value
+        );
+        this.g5anzahl = parseInt(
+          (document.getElementById("g5anzahl") as HTMLInputElement).value
+        );
+        this.g5liter = parseInt(
+          (document.getElementById("g5liter") as HTMLInputElement).value
+        );
+        this.g5volume = parseInt(
+          (document.getElementById("g5volume") as HTMLInputElement).value
+        );
 
         res +=
-          ((this.g1liter + this.g2liter + this.g3liter + this.g4liter + this.g5liter) *
+          ((this.g1liter +
+            this.g2liter +
+            this.g3liter +
+            this.g4liter +
+            this.g5liter) *
             100 *
-            ((this.g1volume + this.g2volume + this.g3volume + this.g4volume + this.g5volume) /
+            ((this.g1volume +
+              this.g2volume +
+              this.g3volume +
+              this.g4volume +
+              this.g5volume) /
               100) *
             0.8 *
-            (this.g1anzahl + this.g2anzahl + this.g3anzahl + this.g4anzahl + this.g5anzahl)) /
+            (this.g1anzahl +
+              this.g2anzahl +
+              this.g3anzahl +
+              this.g4anzahl +
+              this.g5anzahl)) /
           (+gewicht * wassegehalt);
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+        this.result = res;
+        $("#result").css("display", "block");
 
         break;
       }
-      case '6': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
-        this.g2anzahl = parseInt((document.getElementById('g2anzahl') as HTMLInputElement).value);
-        this.g2liter = parseInt((document.getElementById('g2liter') as HTMLInputElement).value);
-        this.g2volume = parseInt((document.getElementById('g2volume') as HTMLInputElement).value);
-        this.g3anzahl = parseInt((document.getElementById('g3anzahl') as HTMLInputElement).value);
-        this.g3liter = parseInt((document.getElementById('g3liter') as HTMLInputElement).value);
-        this.g3volume = parseInt((document.getElementById('g3volume') as HTMLInputElement).value);
-        this.g4anzahl = parseInt((document.getElementById('g4anzahl') as HTMLInputElement).value);
-        this.g4liter = parseInt((document.getElementById('g4liter') as HTMLInputElement).value);
-        this.g4volume = parseInt((document.getElementById('g4volume') as HTMLInputElement).value);
-        this.g5anzahl = parseInt((document.getElementById('g5anzahl') as HTMLInputElement).value);
-        this.g5liter = parseInt((document.getElementById('g5liter') as HTMLInputElement).value);
-        this.g5volume = parseInt((document.getElementById('g5volume') as HTMLInputElement).value);
-        this.g6anzahl = parseInt((document.getElementById('g6anzahl') as HTMLInputElement).value);
-        this.g6liter = parseInt((document.getElementById('g6liter') as HTMLInputElement).value);
-        this.g6volume = parseInt((document.getElementById('g6volume') as HTMLInputElement).value);
+      case "6": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
+        this.g2anzahl = parseInt(
+          (document.getElementById("g2anzahl") as HTMLInputElement).value
+        );
+        this.g2liter = parseInt(
+          (document.getElementById("g2liter") as HTMLInputElement).value
+        );
+        this.g2volume = parseInt(
+          (document.getElementById("g2volume") as HTMLInputElement).value
+        );
+        this.g3anzahl = parseInt(
+          (document.getElementById("g3anzahl") as HTMLInputElement).value
+        );
+        this.g3liter = parseInt(
+          (document.getElementById("g3liter") as HTMLInputElement).value
+        );
+        this.g3volume = parseInt(
+          (document.getElementById("g3volume") as HTMLInputElement).value
+        );
+        this.g4anzahl = parseInt(
+          (document.getElementById("g4anzahl") as HTMLInputElement).value
+        );
+        this.g4liter = parseInt(
+          (document.getElementById("g4liter") as HTMLInputElement).value
+        );
+        this.g4volume = parseInt(
+          (document.getElementById("g4volume") as HTMLInputElement).value
+        );
+        this.g5anzahl = parseInt(
+          (document.getElementById("g5anzahl") as HTMLInputElement).value
+        );
+        this.g5liter = parseInt(
+          (document.getElementById("g5liter") as HTMLInputElement).value
+        );
+        this.g5volume = parseInt(
+          (document.getElementById("g5volume") as HTMLInputElement).value
+        );
+        this.g6anzahl = parseInt(
+          (document.getElementById("g6anzahl") as HTMLInputElement).value
+        );
+        this.g6liter = parseInt(
+          (document.getElementById("g6liter") as HTMLInputElement).value
+        );
+        this.g6volume = parseInt(
+          (document.getElementById("g6volume") as HTMLInputElement).value
+        );
 
         res +=
           ((this.g1liter +
@@ -241,33 +388,76 @@ export class BreathalyzerComponent implements OnInit {
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+
+        this.result = res;
+        $("#result").css("display", "block");
 
         break;
       }
-      case '7': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
-        this.g2anzahl = parseInt((document.getElementById('g2anzahl') as HTMLInputElement).value);
-        this.g2liter = parseInt((document.getElementById('g2liter') as HTMLInputElement).value);
-        this.g2volume = parseInt((document.getElementById('g2volume') as HTMLInputElement).value);
-        this.g3anzahl = parseInt((document.getElementById('g3anzahl') as HTMLInputElement).value);
-        this.g3liter = parseInt((document.getElementById('g3liter') as HTMLInputElement).value);
-        this.g3volume = parseInt((document.getElementById('g3volume') as HTMLInputElement).value);
-        this.g4anzahl = parseInt((document.getElementById('g4anzahl') as HTMLInputElement).value);
-        this.g4liter = parseInt((document.getElementById('g4liter') as HTMLInputElement).value);
-        this.g4volume = parseInt((document.getElementById('g4volume') as HTMLInputElement).value);
-        this.g5anzahl = parseInt((document.getElementById('g5anzahl') as HTMLInputElement).value);
-        this.g5liter = parseInt((document.getElementById('g5liter') as HTMLInputElement).value);
-        this.g5volume = parseInt((document.getElementById('g5volume') as HTMLInputElement).value);
-        this.g6anzahl = parseInt((document.getElementById('g6anzahl') as HTMLInputElement).value);
-        this.g6liter = parseInt((document.getElementById('g6liter') as HTMLInputElement).value);
-        this.g6volume = parseInt((document.getElementById('g6volume') as HTMLInputElement).value);
-        this.g7anzahl = parseInt((document.getElementById('g7anzahl') as HTMLInputElement).value);
-        this.g7liter = parseInt((document.getElementById('g7liter') as HTMLInputElement).value);
-        this.g7volume = parseInt((document.getElementById('g7volume') as HTMLInputElement).value);
+      case "7": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
+        this.g2anzahl = parseInt(
+          (document.getElementById("g2anzahl") as HTMLInputElement).value
+        );
+        this.g2liter = parseInt(
+          (document.getElementById("g2liter") as HTMLInputElement).value
+        );
+        this.g2volume = parseInt(
+          (document.getElementById("g2volume") as HTMLInputElement).value
+        );
+        this.g3anzahl = parseInt(
+          (document.getElementById("g3anzahl") as HTMLInputElement).value
+        );
+        this.g3liter = parseInt(
+          (document.getElementById("g3liter") as HTMLInputElement).value
+        );
+        this.g3volume = parseInt(
+          (document.getElementById("g3volume") as HTMLInputElement).value
+        );
+        this.g4anzahl = parseInt(
+          (document.getElementById("g4anzahl") as HTMLInputElement).value
+        );
+        this.g4liter = parseInt(
+          (document.getElementById("g4liter") as HTMLInputElement).value
+        );
+        this.g4volume = parseInt(
+          (document.getElementById("g4volume") as HTMLInputElement).value
+        );
+        this.g5anzahl = parseInt(
+          (document.getElementById("g5anzahl") as HTMLInputElement).value
+        );
+        this.g5liter = parseInt(
+          (document.getElementById("g5liter") as HTMLInputElement).value
+        );
+        this.g5volume = parseInt(
+          (document.getElementById("g5volume") as HTMLInputElement).value
+        );
+        this.g6anzahl = parseInt(
+          (document.getElementById("g6anzahl") as HTMLInputElement).value
+        );
+        this.g6liter = parseInt(
+          (document.getElementById("g6liter") as HTMLInputElement).value
+        );
+        this.g6volume = parseInt(
+          (document.getElementById("g6volume") as HTMLInputElement).value
+        );
+        this.g7anzahl = parseInt(
+          (document.getElementById("g7anzahl") as HTMLInputElement).value
+        );
+        this.g7liter = parseInt(
+          (document.getElementById("g7liter") as HTMLInputElement).value
+        );
+        this.g7volume = parseInt(
+          (document.getElementById("g7volume") as HTMLInputElement).value
+        );
 
         res +=
           ((this.g1liter +
@@ -298,36 +488,85 @@ export class BreathalyzerComponent implements OnInit {
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+
+        this.result = res;
+        $("#result").css("display", "block");
 
         break;
       }
-      case '8': {
-        this.g1anzahl = parseInt((document.getElementById('g1anzahl') as HTMLInputElement).value);
-        this.g1liter = parseInt((document.getElementById('g1liter') as HTMLInputElement).value);
-        this.g1volume = parseInt((document.getElementById('g1volume') as HTMLInputElement).value);
-        this.g2anzahl = parseInt((document.getElementById('g2anzahl') as HTMLInputElement).value);
-        this.g2liter = parseInt((document.getElementById('g2liter') as HTMLInputElement).value);
-        this.g2volume = parseInt((document.getElementById('g2volume') as HTMLInputElement).value);
-        this.g3anzahl = parseInt((document.getElementById('g3anzahl') as HTMLInputElement).value);
-        this.g3liter = parseInt((document.getElementById('g3liter') as HTMLInputElement).value);
-        this.g3volume = parseInt((document.getElementById('g3volume') as HTMLInputElement).value);
-        this.g4anzahl = parseInt((document.getElementById('g4anzahl') as HTMLInputElement).value);
-        this.g4liter = parseInt((document.getElementById('g4liter') as HTMLInputElement).value);
-        this.g4volume = parseInt((document.getElementById('g4volume') as HTMLInputElement).value);
-        this.g5anzahl = parseInt((document.getElementById('g5anzahl') as HTMLInputElement).value);
-        this.g5liter = parseInt((document.getElementById('g5liter') as HTMLInputElement).value);
-        this.g5volume = parseInt((document.getElementById('g5volume') as HTMLInputElement).value);
-        this.g6anzahl = parseInt((document.getElementById('g6anzahl') as HTMLInputElement).value);
-        this.g6liter = parseInt((document.getElementById('g6liter') as HTMLInputElement).value);
-        this.g6volume = parseInt((document.getElementById('g6volume') as HTMLInputElement).value);
-        this.g7anzahl = parseInt((document.getElementById('g7anzahl') as HTMLInputElement).value);
-        this.g7liter = parseInt((document.getElementById('g7liter') as HTMLInputElement).value);
-        this.g7volume = parseInt((document.getElementById('g7volume') as HTMLInputElement).value);
-        this.g8anzahl = parseInt((document.getElementById('g8anzahl') as HTMLInputElement).value);
-        this.g8liter = parseInt((document.getElementById('g8liter') as HTMLInputElement).value);
-        this.g8volume = parseInt((document.getElementById('g8volume') as HTMLInputElement).value);
+      case "8": {
+        this.g1anzahl = parseInt(
+          (document.getElementById("g1anzahl") as HTMLInputElement).value
+        );
+        this.g1liter = parseInt(
+          (document.getElementById("g1liter") as HTMLInputElement).value
+        );
+        this.g1volume = parseInt(
+          (document.getElementById("g1volume") as HTMLInputElement).value
+        );
+        this.g2anzahl = parseInt(
+          (document.getElementById("g2anzahl") as HTMLInputElement).value
+        );
+        this.g2liter = parseInt(
+          (document.getElementById("g2liter") as HTMLInputElement).value
+        );
+        this.g2volume = parseInt(
+          (document.getElementById("g2volume") as HTMLInputElement).value
+        );
+        this.g3anzahl = parseInt(
+          (document.getElementById("g3anzahl") as HTMLInputElement).value
+        );
+        this.g3liter = parseInt(
+          (document.getElementById("g3liter") as HTMLInputElement).value
+        );
+        this.g3volume = parseInt(
+          (document.getElementById("g3volume") as HTMLInputElement).value
+        );
+        this.g4anzahl = parseInt(
+          (document.getElementById("g4anzahl") as HTMLInputElement).value
+        );
+        this.g4liter = parseInt(
+          (document.getElementById("g4liter") as HTMLInputElement).value
+        );
+        this.g4volume = parseInt(
+          (document.getElementById("g4volume") as HTMLInputElement).value
+        );
+        this.g5anzahl = parseInt(
+          (document.getElementById("g5anzahl") as HTMLInputElement).value
+        );
+        this.g5liter = parseInt(
+          (document.getElementById("g5liter") as HTMLInputElement).value
+        );
+        this.g5volume = parseInt(
+          (document.getElementById("g5volume") as HTMLInputElement).value
+        );
+        this.g6anzahl = parseInt(
+          (document.getElementById("g6anzahl") as HTMLInputElement).value
+        );
+        this.g6liter = parseInt(
+          (document.getElementById("g6liter") as HTMLInputElement).value
+        );
+        this.g6volume = parseInt(
+          (document.getElementById("g6volume") as HTMLInputElement).value
+        );
+        this.g7anzahl = parseInt(
+          (document.getElementById("g7anzahl") as HTMLInputElement).value
+        );
+        this.g7liter = parseInt(
+          (document.getElementById("g7liter") as HTMLInputElement).value
+        );
+        this.g7volume = parseInt(
+          (document.getElementById("g7volume") as HTMLInputElement).value
+        );
+        this.g8anzahl = parseInt(
+          (document.getElementById("g8anzahl") as HTMLInputElement).value
+        );
+        this.g8liter = parseInt(
+          (document.getElementById("g8liter") as HTMLInputElement).value
+        );
+        this.g8volume = parseInt(
+          (document.getElementById("g8volume") as HTMLInputElement).value
+        );
 
         res +=
           ((this.g1liter +
@@ -361,8 +600,8 @@ export class BreathalyzerComponent implements OnInit {
 
         res *= 10;
         res = Math.round(res * 100) / 100;
-        res.toString();
-        alert(res);
+        this.result = res;
+        $("#result").css("display", "block");
         break;
       }
       default: {
@@ -372,7 +611,7 @@ export class BreathalyzerComponent implements OnInit {
   }
 
   checkDrink() {
-    if (this.selectedOption == '1') {
+    if (this.selectedOption == "1") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;
@@ -383,7 +622,7 @@ export class BreathalyzerComponent implements OnInit {
       this.isDrink8Visible = false;
       this.isDrink1Visible = true;
     }
-    if (this.selectedOption == '2') {
+    if (this.selectedOption == "2") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;
@@ -395,7 +634,7 @@ export class BreathalyzerComponent implements OnInit {
       this.isDrink1Visible = true;
       this.isDrink2Visible = true;
     }
-    if (this.selectedOption == '3') {
+    if (this.selectedOption == "3") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;
@@ -408,7 +647,7 @@ export class BreathalyzerComponent implements OnInit {
       this.isDrink2Visible = true;
       this.isDrink3Visible = true;
     }
-    if (this.selectedOption == '4') {
+    if (this.selectedOption == "4") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;
@@ -422,7 +661,7 @@ export class BreathalyzerComponent implements OnInit {
       this.isDrink3Visible = true;
       this.isDrink4Visible = true;
     }
-    if (this.selectedOption == '5') {
+    if (this.selectedOption == "5") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;
@@ -437,7 +676,7 @@ export class BreathalyzerComponent implements OnInit {
       this.isDrink4Visible = true;
       this.isDrink5Visible = true;
     }
-    if (this.selectedOption == '6') {
+    if (this.selectedOption == "6") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;
@@ -453,7 +692,7 @@ export class BreathalyzerComponent implements OnInit {
       this.isDrink5Visible = true;
       this.isDrink6Visible = true;
     }
-    if (this.selectedOption == '7') {
+    if (this.selectedOption == "7") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;
@@ -470,7 +709,7 @@ export class BreathalyzerComponent implements OnInit {
       this.isDrink6Visible = true;
       this.isDrink7Visible = true;
     }
-    if (this.selectedOption == '8') {
+    if (this.selectedOption == "8") {
       this.isDrink1Visible = false;
       this.isDrink2Visible = false;
       this.isDrink3Visible = false;

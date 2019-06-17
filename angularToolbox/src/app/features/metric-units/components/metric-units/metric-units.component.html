@@ -1,9 +1,9 @@
 <form class="form">
-  <mat-form-field name="numb">
+  <mat-form-field name="numb" style="padding-right: 15px;">
     <input [(ngModel)]="numb" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Wert" />
   </mat-form-field>
   <span>&nbsp;</span>
-  <mat-form-field>
+  <mat-form-field style="padding-right: 20px;">
     <mat-label>Von</mat-label>
     <mat-select [(ngModel)]="from" name="from_select">
       <mat-option *ngFor="let unit of units" [value]="unit.value">
