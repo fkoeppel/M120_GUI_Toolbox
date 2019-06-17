@@ -1,47 +1,35 @@
 <form class="form">
-    <h3>Fist Side</h3>
-    <mat-form-field name="numb1">
-        <input [(ngModel)]="numb1"
-            [ngModelOptions]="{ standalone: true }"
-            matInput
-            type="number"
-            placeholder="Value"
-            color='primary' />
-    </mat-form-field>
-    <span>&nbsp;</span>
-    <mat-form-field>
-        <mat-label>First Side</mat-label>
-        <mat-select [(ngModel)]="first"
-            name="first_select"
-            color='primary'>
-            <mat-option *ngFor="let side of sides"
-                [value]="side.value">
-                {{ side.viewValue }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <h3>Second Side</h3>
-    <mat-form-field name="numb2">
-        <input [(ngModel)]="numb2"
-            color='primary'
-            [ngModelOptions]="{ standalone: true }"
-            matInput
-            type="number"
-            placeholder="Value" />
-    </mat-form-field>
-    <span>&nbsp;</span>
-    <mat-form-field>
-        <mat-label>Second Side</mat-label>
-        <mat-select [(ngModel)]="second"
-            name="second_select"
-            color='primary'>
-            <mat-option *ngFor="let side of sides"
-                [value]="side.value">
-                {{ side.viewValue }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <h3 class="result">Result:&nbsp;{{ calc() }}&nbsp;</h3>
-    <div id="tri"
-        class='center'></div>
+  <mat-form-field name="numb1">
+    <input [(ngModel)]="numb1" [ngModelOptions]="{ standalone: true }" matInput type="number" placeholder="Wert"
+      color='primary' />
+  </mat-form-field>
+  <span>&nbsp;</span>
+  <mat-form-field>
+    <mat-label>1. Seite</mat-label>
+    <mat-select [(ngModel)]="first" name="first_select" color='primary'>
+      <mat-option *ngFor="let side of sides" [value]="side.value">
+        {{ side.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field name="numb2">
+    <input [(ngModel)]="numb2" color='primary' [ngModelOptions]="{ standalone: true }" matInput type="number"
+      placeholder="Wert" />
+  </mat-form-field>
+  <span>&nbsp;</span>
+  <mat-form-field>
+    <mat-label>2. Seite</mat-label>
+    <mat-select [(ngModel)]="second" name="second_select" color='primary'>
+      <mat-option *ngFor="let side of sides" [value]="side.value">
+        {{ side.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <h3 class="result">Resultat:</h3>
+  <h3 class="result">{{ calc() }}</h3>
+  <br>
+  <div id="tri" class='center'></div>
 </form>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { getTypeNameForDebugging } from '@angular/common/src/directives/ng_for_of';
+import { Component, OnInit } from "@angular/core";
+import { getTypeNameForDebugging } from "@angular/common/src/directives/ng_for_of";
 
 export interface Side {
   value: number;
@@ -7,9 +7,9 @@ export interface Side {
 }
 
 @Component({
-  selector: 'app-pythagoras',
-  templateUrl: './pythagoras.component.html',
-  styleUrls: ['./pythagoras.component.scss']
+  selector: "app-pythagoras",
+  templateUrl: "./pythagoras.component.html",
+  styleUrls: ["./pythagoras.component.scss"]
 })
 export class PythagorasComponent implements OnInit {
   constructor() {
@@ -29,16 +29,16 @@ export class PythagorasComponent implements OnInit {
   side_b: number;
 
   sides: Side[] = [
-    { value: 1, viewValue: 'Side a' },
-    { value: 2, viewValue: 'Side b' },
-    { value: 3, viewValue: 'Side c' }
+    { value: 1, viewValue: "Seite a" },
+    { value: 2, viewValue: "Seite b" },
+    { value: 3, viewValue: "Seite c" }
   ];
   openFromLeft() {
-    console.log('hey');
+    console.log("hey");
   }
 
   ngOnInit() {
-    this.elem = document.getElementById('tri') as HTMLElement;
+    this.elem = document.getElementById("tri") as HTMLElement;
     this.elem.style.borderTopWidth = this.side_a.toString();
     this.elem.style.borderRightWidth = this.side_b.toString();
     console.log(this.elem);
@@ -47,7 +47,7 @@ export class PythagorasComponent implements OnInit {
   calc() {
     if (this.numb1 > 0 && this.numb2 > 0 && this.first > 0 && this.second > 0) {
       if (this.first == this.second) {
-        return 'Please take to different Sides';
+        return "Please take to different Sides";
       }
       let both = this.first + this.second,
         calc_res;
@@ -103,8 +103,8 @@ export class PythagorasComponent implements OnInit {
 
     a = a.toString();
     b = b.toString();
-    a += 'px';
-    b += 'px';
+    a += "px";
+    b += "px";
     this.side_a = a;
     this.side_b = b;
 
@@ -118,13 +118,13 @@ export class PythagorasComponent implements OnInit {
       c = this.numb1;
       aorb = this.numb2;
       if (aorb >= c) {
-        return 'c has to be bigger than ' + this.getName(this.second);
+        return "c has to be bigger than " + this.getName(this.second);
       }
     } else {
       aorb = this.numb1;
       c = this.numb2;
       if (aorb >= c) {
-        return 'c has to be bigger than ' + this.getName(this.first);
+        return "c has to be bigger than " + this.getName(this.first);
       }
     }
 
