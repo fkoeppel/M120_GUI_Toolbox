@@ -14,6 +14,7 @@ import { HashGeneratorService } from './features/hash-generator/services/hash-ge
 import { MaterialModule } from './features/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PythagorasComponent } from './features/pythagoras/components/pythagoras/pythagoras.component';
+import { BreathalyzerComponent } from './features/breathalyzer/components/breathalyzer/breathalyzer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PythagorasComponent } from './features/pythagoras/components/pythagoras
     CoordinatesVisualizerComponent,
     MetricUnitsComponent,
     HashGeneratorComponent,
-    PythagorasComponent
+    PythagorasComponent,
+    BreathalyzerComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialModule, BrowserAnimationsModule],
   providers: [MetricUnitsService, CoordinatesVisualizerService, HashGeneratorService],

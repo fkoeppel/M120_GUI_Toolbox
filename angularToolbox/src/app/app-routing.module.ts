@@ -5,13 +5,15 @@ import { MetricUnitsComponent } from './features/metric-units/components/metric-
 import { CoordinatesVisualizerComponent } from './features/coordinates-visualizer/components/coordinates-visualizer/coordinates-visualizer.component';
 import { HashGeneratorComponent } from './features/hash-generator/components/hash-generator/hash-generator.component';
 import { PythagorasComponent } from './features/pythagoras/components/pythagoras/pythagoras.component';
+import { BreathalyzerComponent } from './features/breathalyzer/components/breathalyzer/breathalyzer.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'metric-units', component: MetricUnitsComponent },
   { path: 'coordinates-visualizer', component: CoordinatesVisualizerComponent },
   { path: 'hash-generator', component: HashGeneratorComponent },
-  { path: 'pythagoras', component: PythagorasComponent }
+  { path: 'pythagoras', component: PythagorasComponent },
+  { path: 'breathalyzer', component: BreathalyzerComponent }
 ];
 
 @NgModule({
