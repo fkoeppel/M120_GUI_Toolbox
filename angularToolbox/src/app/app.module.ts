@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BreathalyzerComponent } from './features/breathalyzer/components/breathalyzer/breathalyzer.component';
-import { BreathalyzerService } from './features/breathalyzer/services/breathalyzer.service';
 import { HomeComponent } from './features/home/components/home/home.component';
 import { NavigationComponent } from './features/navigation/components/navigation/navigation.component';
 import { CoordinatesVisualizerComponent } from './features/coordinates-visualizer/components/coordinates-visualizer/coordinates-visualizer.component';
@@ -20,7 +18,6 @@ import { PythagorasComponent } from './features/pythagoras/components/pythagoras
 @NgModule({
   declarations: [
     AppComponent,
-    BreathalyzerComponent,
     HomeComponent,
     NavigationComponent,
     CoordinatesVisualizerComponent,
@@ -29,12 +26,7 @@ import { PythagorasComponent } from './features/pythagoras/components/pythagoras
     PythagorasComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialModule, BrowserAnimationsModule],
-  providers: [
-    BreathalyzerService,
-    MetricUnitsService,
-    CoordinatesVisualizerService,
-    HashGeneratorService
-  ],
+  providers: [MetricUnitsService, CoordinatesVisualizerService, HashGeneratorService],
   bootstrap: [AppComponent],
   exports: [MaterialModule]
 })

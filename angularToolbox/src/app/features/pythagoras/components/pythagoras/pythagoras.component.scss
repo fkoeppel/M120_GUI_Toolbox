@@ -1,0 +1,65 @@
+.result {
+    font-size: 20px;
+    color: #673fb4;
+}
+
+#tri {
+    width: 0;
+    height: 0;
+    border-top-width: 100px;
+    border-top-style: solid;
+    border-top-color: transparent;
+    border-right-width: 100px;
+    border-right-style: solid;
+    border-right-color: #673fb4;
+}
+
+.form {
+    padding-left: 100px;
+    padding-top: 50px;
+}
+
+.rainbow {
+    animation: rainbow 2.5s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+    100%,
+    0% {
+        color: rgb(255, 0, 0);
+    }
+    8% {
+        color: rgb(255, 127, 0);
+    }
+    16% {
+        color: rgb(255, 255, 0);
+    }
+    25% {
+        color: rgb(127, 255, 0);
+    }
+    33% {
+        color: rgb(0, 255, 0);
+    }
+    41% {
+        color: rgb(0, 255, 127);
+    }
+    50% {
+        color: rgb(0, 255, 255);
+    }
+    58% {
+        color: rgb(0, 127, 255);
+    }
+    66% {
+        color: rgb(0, 0, 255);
+    }
+    75% {
+        color: rgb(127, 0, 255);
+    }
+    83% {
+        color: rgb(255, 0, 255);
+    }
+    91% {
+        color: rgb(255, 0, 127);
+    }
+}

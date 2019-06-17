@@ -38,11 +38,13 @@
 
   <button type="submit"
     mat-raised-button
+    color='accent'
     [disabled]="!coordinateForm.valid">Add</button>
 
   <button mat-raised-button
     class="button-generate"
     [disabled]="!(generateEnabled$ | async)"
+    color='primary'
     (click)="generate()">Generate</button>
 
 </form>
@@ -50,7 +52,8 @@
 <div class="output">
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let coordinate of coordinates$ | async"
-      [selectable]="selectable">
+      [selectable]="selectable"
+      color='accent'>
       X: {{ coordinate.X }} Y: {{ coordinate.Y }}
       <mat-icon matChipRemove
         (click)="remove(coordinate)">cancel</mat-icon>
