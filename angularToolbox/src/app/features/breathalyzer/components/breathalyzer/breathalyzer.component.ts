@@ -6,14 +6,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./breathalyzer.component.scss"]
 })
 export class BreathalyzerComponent implements OnInit {
-  private isDrink1Visible = true;
-  private isDrink2Visible = false;
-  private isDrink3Visible = false;
-  private isDrink4Visible = false;
-  private isDrink5Visible = false;
-  private isDrink6Visible = false;
-  private isDrink7Visible = false;
-  private isDrink8Visible = false;
+  public isDrink1Visible = true;
+  public isDrink2Visible = false;
+  public isDrink3Visible = false;
+  public isDrink4Visible = false;
+  public isDrink5Visible = false;
+  public isDrink6Visible = false;
+  public isDrink7Visible = false;
+  public isDrink8Visible = false;
 
   g1anzahl: number;
   g1liter: number;
